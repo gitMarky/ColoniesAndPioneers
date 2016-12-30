@@ -32,8 +32,8 @@ func Initialize()
     		var y = nodes[i][1];
 	    	var node = CreateObject(Ore);
 	    	node->SetCategory(C4D_StaticBack);
-	    	node->SetPosition(GetXFromHexCoordinates(x, y),
-	    	                  GetYFromHexCoordinates(x, y));
+	    	node->SetPosition(GetXFromNodeCoordinates(x, y),
+	    	                  GetYFromNodeCoordinates(x, y));
 	    	node->Message("@(%d/%d)", x, y);
     	}
     }

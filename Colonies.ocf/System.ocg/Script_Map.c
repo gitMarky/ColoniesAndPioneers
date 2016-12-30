@@ -99,6 +99,7 @@ global func IsEven(int number)
  
  @par x The x component in the hex coordinate system.
  @par y The y component in the hex coordinate system.
+ 
  @return proplist A proplist describing the hex.
  */
 global func CreateHex(int x, int y)
@@ -116,6 +117,7 @@ global func CreateHex(int x, int y)
  
  @par x The x component in the edge coordinate system.
  @par y The y component in the edge coordinate system.
+ 
  @return proplist A proplist describing the edge.
  */
 global func CreateEdge(int x, int y)
@@ -133,6 +135,7 @@ global func CreateEdge(int x, int y)
  
  @par x The x component in the node coordinate system.
  @par y The y component in the node coordinate system.
+ 
  @return proplist A proplist describing the node.
  */
 global func CreateNode(int x, int y)
@@ -151,7 +154,8 @@ global func CreateNode(int x, int y)
  @par x The global x component in the coordinate system.
  @par y The global y component in the coordinate system.
  @par modifiers An array of modifiers that contains coordinates
-                that are relative to {@c x} and {@c y}. 
+                that are relative to {@c x} and {@c y}.
+
  @return An array where {@c x} and {@c y} where added to each component
          in the {@c modifiers} array.
  */
@@ -178,6 +182,7 @@ global func GetCoordinateArray(int x, int y, array modifiers)
  @par x_odd_y_even An array of modifiers that contains coordinates
                 that are relative to {@c x} and {@c y}.
                 Is chosen of x is odd and y is even. 
+
  @return An array where {@c x} and {@c y} where added to each component
          in the {@c modifiers} array.
  */
@@ -216,6 +221,7 @@ global func GetNodeCoordinateArray(int x, int y, array x_even_y_odd, array x_odd
  @par x_even_y_even An array of modifiers that contains coordinates
                 that are relative to {@c x} and {@c y}.
                 Is chosen of x is even and y is even. 
+
  @return An array where {@c x} and {@c y} where added to each component
          in the {@c modifiers} array.
  */
@@ -248,6 +254,7 @@ global func GetEdgeCoordinateArray(int x, int y, array x_even_y_odd, array x_odd
  
  @par x The x component in the hex coordinate system.
  @par y The y component in the hex coordinate system.
+
  @return array The coordinates of adjacent hexes.
  */
 global func GetHexesAdjacentToHex(int x, int y)
@@ -261,6 +268,7 @@ global func GetHexesAdjacentToHex(int x, int y)
  
  @par x The x component in the hex coordinate system.
  @par y The y component in the hex coordinate system.
+
  @return array The coordinates of adjacent nodes.
  */
 global func GetNodesAdjacentToHex(int x, int y)
@@ -274,6 +282,7 @@ global func GetNodesAdjacentToHex(int x, int y)
  
  @par x The x component in the hex coordinate system.
  @par y The y component in the hex coordinate system.
+
  @return array The coordinates of adjacent edges.
  */
 global func GetEdgesAdjacentToHex(int x, int y)
@@ -287,6 +296,7 @@ global func GetEdgesAdjacentToHex(int x, int y)
  
  @par x The x component in the node coordinate system.
  @par y The y component in the node coordinate system.
+
  @return array The coordinates of adjacent hexes.
  */
 global func GetHexesAdjacentToNode(int x, int y)
@@ -301,6 +311,7 @@ global func GetHexesAdjacentToNode(int x, int y)
  
  @par x The x component in the node coordinate system.
  @par y The y component in the node coordinate system.
+
  @return array The coordinates of adjacent nodes.
  */
 global func GetNodesAdjacentToNode(int x, int y)
@@ -315,6 +326,7 @@ global func GetNodesAdjacentToNode(int x, int y)
  
  @par x The x component in the node coordinate system.
  @par y The y component in the node coordinate system.
+
  @return array The coordinates of adjacent edges.
  */
 global func GetEdgesAdjacentToNode(int x, int y)
@@ -329,6 +341,7 @@ global func GetEdgesAdjacentToNode(int x, int y)
  
  @par x The x component in the edge coordinate system.
  @par y The y component in the edge coordinate system.
+
  @return array The coordinates of adjacent hexes.
  */
 global func GetHexesAdjacentToEdge(int x, int y)
@@ -344,6 +357,7 @@ global func GetHexesAdjacentToEdge(int x, int y)
  
  @par x The x component in the edge coordinate system.
  @par y The y component in the edge coordinate system.
+
  @return array The coordinates of adjacent nodes.
  */
 global func GetNodesAdjacentToEdge(int x, int y)
@@ -359,6 +373,7 @@ global func GetNodesAdjacentToEdge(int x, int y)
  
  @par x The x component in the edge coordinate system.
  @par y The y component in the edge coordinate system.
+
  @return array The coordinates of adjacent edges.
  */
 global func GetEdgesAdjacentToEdge(int x, int y)
