@@ -60,7 +60,7 @@ static const MAP_EDGE_EVEN_ODD_ADJACENT_HEX_COORDINATES = [[-1, +0], [+1, +0]];
 static const MAP_EDGE_EVEN_ODD_ADJACENT_NODE_COORDINATES = [[+0, +0], [+1, +1]];
 
 /** Coordinate modifiers for adjacent edges of an edge, where the x coordinate is even and the y coordinate is odd. */
-static const MAP_EDGE_EVEN_ODD_ADJACENT_NODE_COORDINATES = [[-1, -1], [+0, -1], [+0, +1], [+1, +1]];
+static const MAP_EDGE_EVEN_ODD_ADJACENT_EDGE_COORDINATES = [[-1, -1], [+0, -1], [+0, +1], [+1, +1]];
 
 /** Coordinate modifiers for adjacent hexes of an edge, where the x coordinate is odd and the y coordinate is even. */
 static const MAP_EDGE_ODD_EVEN_ADJACENT_HEX_COORDINATES = [[+0, -1], [+0, +1]];
@@ -69,7 +69,7 @@ static const MAP_EDGE_ODD_EVEN_ADJACENT_HEX_COORDINATES = [[+0, -1], [+0, +1]];
 static const MAP_EDGE_ODD_EVEN_ADJACENT_NODE_COORDINATES = [[+0, +0], [+1, +1]];
 
 /** Coordinate modifiers for adjacent edges of an edge, where the x coordinate is odd and the y coordinate is even. */
-static const MAP_EDGE_ODD_EVEN_ADJACENT_NODE_COORDINATES = [[-1, -1], [-1, +0], [+1, +1], [+1, +0]];
+static const MAP_EDGE_ODD_EVEN_ADJACENT_EDGE_COORDINATES = [[-1, -1], [-1, +0], [+1, +1], [+1, +0]];
 
 /** Coordinate modifiers for adjacent hexes of an edge, where the x coordinate is even and the y coordinate is even. */
 static const MAP_EDGE_EVEN_EVEN_ADJACENT_HEX_COORDINATES = [[-1, -1], [+1, +1]];
@@ -78,7 +78,7 @@ static const MAP_EDGE_EVEN_EVEN_ADJACENT_HEX_COORDINATES = [[-1, -1], [+1, +1]];
 static const MAP_EDGE_EVEN_EVEN_ADJACENT_NODE_COORDINATES = [[+0, +1], [+1, +0]];
 
 /** Coordinate modifiers for adjacent edges of an edge, where the x coordinate is even and the y coordinate is even. */
-static const MAP_EDGE_EVEN_EVEN_ADJACENT_NODE_COORDINATES = [[-1, +0], [+0, +1], [+1, +0], [+0, -1]];
+static const MAP_EDGE_EVEN_EVEN_ADJACENT_EDGE_COORDINATES = [[-1, +0], [+0, +1], [+1, +0], [+0, -1]];
 
 // functions
 
@@ -202,6 +202,48 @@ global func GetNodeCoordinateArray(int x, int y, array x_even_y_odd, array x_odd
 
 
 /**
+ Gets a coordinate array in global coordinates,
+ with plausibility checks for edges.
+ 
+ @par x The global x component in the coordinate system.
+ @par y The global y component in the coordinate system.
+ @par x_even_y_odd An array of modifiers that contains coordinates
+                that are relative to {@c x} and {@c y}.
+                Is chosen of x is even and y is odd.
+ @par x_odd_y_even An array of modifiers that contains coordinates
+                that are relative to {@c x} and {@c y}.
+                Is chosen of x is odd and y is even. 
+ @par x_even_y_even An array of modifiers that contains coordinates
+                that are relative to {@c x} and {@c y}.
+                Is chosen of x is even and y is even. 
+ @return An array where {@c x} and {@c y} where added to each component
+         in the {@c modifiers} array.
+ */
+global func GetEdgeCoordinateArray(int x, int y, array x_even_y_odd, array x_odd_y_even, array x_even_y_even)
+{
+	var is_x_even = IsEven(x);
+	var is_y_even = IsEven(y);
+	
+	if  (is_x_even && !is_y_even)
+	{
+		return GetCoordinateArray(x, y, x_even_y_odd);
+	}
+	else if (!is_x_even && is_y_even)
+	{
+		return GetCoordinateArray(x, y, x_odd_y_even);
+	}
+	else if (is_x_even && is_y_even)
+	{
+		return GetCoordinateArray(x, y, x_even_y_even);
+	}
+	else
+	{
+		FatalError(Format("Invalid edge coordinates: %d, %d - the coordinate pair must not be odd/odd", x, y));
+	}
+}
+
+
+/**
  Gets the hex coordinates that are adjacent to a hex.
  
  @par x The x component in the hex coordinate system.
@@ -249,7 +291,8 @@ global func GetEdgesAdjacentToHex(int x, int y)
  */
 global func GetHexesAdjacentToNode(int x, int y)
 {
-	return GetNodeCoordinateArray(x, y, MAP_NODE_EVEN_ODD_ADJACENT_HEX_COORDINATES, MAP_NODE_ODD_EVEN_ADJACENT_HEX_COORDINATES);
+	return GetNodeCoordinateArray(x, y, MAP_NODE_EVEN_ODD_ADJACENT_HEX_COORDINATES,
+	                                    MAP_NODE_ODD_EVEN_ADJACENT_HEX_COORDINATES);
 }
 
 
@@ -262,7 +305,8 @@ global func GetHexesAdjacentToNode(int x, int y)
  */
 global func GetNodesAdjacentToNode(int x, int y)
 {
-	return GetNodeCoordinateArray(x, y, MAP_NODE_EVEN_ODD_ADJACENT_NODE_COORDINATES, MAP_NODE_ODD_EVEN_ADJACENT_NODE_COORDINATES);
+	return GetNodeCoordinateArray(x, y, MAP_NODE_EVEN_ODD_ADJACENT_NODE_COORDINATES,
+	                                    MAP_NODE_ODD_EVEN_ADJACENT_NODE_COORDINATES);
 }
 
 
@@ -275,5 +319,51 @@ global func GetNodesAdjacentToNode(int x, int y)
  */
 global func GetEdgesAdjacentToNode(int x, int y)
 {
-	return GetNodeCoordinateArray(x, y, MAP_NODE_EVEN_ODD_ADJACENT_EDGE_COORDINATES, MAP_NODE_ODD_EVEN_ADJACENT_EDGE_COORDINATES);
+	return GetNodeCoordinateArray(x, y, MAP_NODE_EVEN_ODD_ADJACENT_EDGE_COORDINATES,
+	                                    MAP_NODE_ODD_EVEN_ADJACENT_EDGE_COORDINATES);
+}
+
+
+/**
+ Gets the hex coordinates that are adjacent to an edge.
+ 
+ @par x The x component in the edge coordinate system.
+ @par y The y component in the edge coordinate system.
+ @return array The coordinates of adjacent hexes.
+ */
+global func GetHexesAdjacentToEdge(int x, int y)
+{
+	return GetEdgeCoordinateArray(x, y, MAP_EDGE_EVEN_ODD_ADJACENT_HEX_COORDINATES, 
+	                                    MAP_EDGE_ODD_EVEN_ADJACENT_HEX_COORDINATES,
+	                                    MAP_EDGE_EVEN_EVEN_ADJACENT_HEX_COORDINATES);
+}
+
+
+/**
+ Gets the node coordinates that are adjacent to an edge.
+ 
+ @par x The x component in the edge coordinate system.
+ @par y The y component in the edge coordinate system.
+ @return array The coordinates of adjacent nodes.
+ */
+global func GetNodesAdjacentToEdge(int x, int y)
+{
+	return GetEdgeCoordinateArray(x, y, MAP_EDGE_EVEN_ODD_ADJACENT_NODE_COORDINATES,
+	                                    MAP_EDGE_ODD_EVEN_ADJACENT_NODE_COORDINATES,
+	                                    MAP_EDGE_EVEN_EVEN_ADJACENT_NODE_COORDINATES);
+}
+
+
+/**
+ Gets the edge coordinates that are adjacent to an edge.
+ 
+ @par x The x component in the edge coordinate system.
+ @par y The y component in the edge coordinate system.
+ @return array The coordinates of adjacent edges.
+ */
+global func GetEdgesAdjacentToEdge(int x, int y)
+{
+	return GetEdgeCoordinateArray(x, y, MAP_EDGE_EVEN_ODD_ADJACENT_EDGE_COORDINATES,
+	                                    MAP_EDGE_ODD_EVEN_ADJACENT_EDGE_COORDINATES,
+	                                    MAP_EDGE_EVEN_EVEN_ADJACENT_EDGE_COORDINATES);
 }
