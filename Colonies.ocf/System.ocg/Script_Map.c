@@ -79,3 +79,68 @@ static const MAP_EDGE_EVEN_EVEN_ADJACENT_NODE_COORDINATES = [[+0, +1], [+1, +0]]
 
 /** Coordinate modifiers for adjacent edges of an edge, where the x coordinate is even and the y coordinate is even. */
 static const MAP_EDGE_EVEN_EVEN_ADJACENT_NODE_COORDINATES = [[-1, +0], [+0, +1], [+1, +0], [+0, -1]];
+
+// functions
+
+/**
+ Tells if a number is even.
+ 
+ @par number the number.
+ @return {@c true}, if the number is even.
+ */
+global func IsEven(int number)
+{
+	return (number % 2) == 0;
+}
+
+
+/**
+ Creates a hex with the given coordinates.
+ 
+ @par x The x component in the hex coordinate system.
+ @par y The y component in the hex coordinate system.
+ @return proplist A proplist describing the hex.
+ */
+global func CreateHex(int x, int y)
+{
+	return {
+		isHex = true,
+		X = x,
+		Y = y,
+	};
+}
+
+
+/**
+ Creates an edge with the given coordinates.
+ 
+ @par x The x component in the edge coordinate system.
+ @par y The y component in the edge coordinate system.
+ @return proplist A proplist describing the edge.
+ */
+global func CreateEdge(int x, int y)
+{
+	return {
+		isEdge = true,
+		X = x,
+		Y = y,
+	};
+}
+
+
+/**
+ Creates a node with the given coordinates.
+ 
+ @par x The x component in the node coordinate system.
+ @par y The y component in the node coordinate system.
+ @return proplist A proplist describing the node.
+ */
+
+global func CreateNode(int x, int y)
+{
+	return {
+		isNode = true,
+		X = x,
+		Y = y,
+	};
+}
