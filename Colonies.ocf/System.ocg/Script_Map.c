@@ -135,7 +135,6 @@ global func CreateEdge(int x, int y)
  @par y The y component in the node coordinate system.
  @return proplist A proplist describing the node.
  */
-
 global func CreateNode(int x, int y)
 {
 	return {
@@ -143,4 +142,38 @@ global func CreateNode(int x, int y)
 		X = x,
 		Y = y,
 	};
+}
+
+
+/**
+ Gets a coordinate array in global coordinates.
+ 
+ @par x The global x component in the coordinate system.
+ @par y The global y component in the coordinate system.
+ @par modifiers An array of modifiers that contains coordinates
+                that are relative to {@c x} and {@c y}. 
+ @return An array where {@c x} and {@c y} where added to each component
+         in the {@c modifiers} array.
+ */
+global func GetCoordinateArray(int x, int y, array modifiers)
+{
+	var coordinates = [];
+	for (var i = 0; i < GetLength(modifiers); ++i)
+	{
+		coordinates[i] = [modifiers[0] + x, modifiers[1] + y];
+	}
+	return coordinates;
+}
+
+
+/**
+ Gets the hex coordinates that are adjacent to a hex.
+ 
+ @par x The x component in the hex coordinate system.
+ @par y The y component in the hex coordinate system.
+ @return array The coordinates of adjacent hexes.
+ */
+global func GetHexesAdjacentToHex(int x, int y)
+{
+	return GetCoordinateArray(x, y, MAP_HEX_ADJACENT_HEX_COORDINATES);
 }
