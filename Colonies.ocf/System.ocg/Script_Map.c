@@ -177,3 +177,29 @@ global func GetHexesAdjacentToHex(int x, int y)
 {
 	return GetCoordinateArray(x, y, MAP_HEX_ADJACENT_HEX_COORDINATES);
 }
+
+
+/**
+ Gets the node coordinates that are adjacent to a hex.
+ 
+ @par x The x component in the hex coordinate system.
+ @par y The y component in the hex coordinate system.
+ @return array The coordinates of adjacent nodes.
+ */
+global func GetNodesAdjacentToHex(int x, int y)
+{
+	return GetCoordinateArray(x, y, MAP_HEX_ADJACENT_NODE_COORDINATES);
+}
+
+
+/**
+ Gets the edge coordinates that are adjacent to a hex.
+ 
+ @par x The x component in the hex coordinate system.
+ @par y The y component in the hex coordinate system.
+ @return array The coordinates of adjacent edges.
+ */
+global func GetEdgesAdjacentToHex(int x, int y)
+{
+	return GetCoordinateArray(x, y, MAP_HEX_ADJACENT_EDGE_COORDINATES);
+}
