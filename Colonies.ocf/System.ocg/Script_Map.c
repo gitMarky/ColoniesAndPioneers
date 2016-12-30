@@ -160,7 +160,7 @@ global func GetCoordinateArray(int x, int y, array modifiers)
 	var coordinates = [];
 	for (var i = 0; i < GetLength(modifiers); ++i)
 	{
-		coordinates[i] = [modifiers[0] + x, modifiers[1] + y];
+		coordinates[i] = [modifiers[i][0] + x, modifiers[i][1] + y];
 	}
 	return coordinates;
 }
