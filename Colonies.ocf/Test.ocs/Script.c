@@ -1,8 +1,8 @@
 
 func Initialize()
 {
-    for (var hex_x = 0; hex_x < 10; hex_x += 2)
-    for (var hex_y = 0; hex_y < 10; hex_y += 2)
+    for (var hex_x = 0; hex_x < 20; hex_x += 2)
+    for (var hex_y = 0; hex_y < 20; hex_y += 2)
     {
 	    // Create hex centers
     	var dummy = CreateObject(Rock);
