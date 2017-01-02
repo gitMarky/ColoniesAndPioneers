@@ -52,3 +52,30 @@ func GetNumberChip()
 {
 	return this.number_chip;
 }
+
+
+/**
+ Assigns a resource to the hex.
+ 
+ @par resource This resource will be produced in that
+               hex if the number is {@link GameMap_Hex#GetNumber}
+               is rolled.
+
+ @return object The hex itself, so that further functions can be called on it.
+ */
+func SetResource(id resource)
+{
+	this.resource = resource;
+	return this;
+}
+
+
+/**
+ Gets the resource that is produced on this hex.
+ 
+ @return id The resource.
+ */
+func GetResource()
+{
+	return this.resource;
+}
