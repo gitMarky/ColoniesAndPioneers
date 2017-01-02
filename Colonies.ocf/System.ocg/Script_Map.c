@@ -95,24 +95,6 @@ global func IsEven(int number)
 
 
 /**
- Creates a hex with the given coordinates.
- 
- @par x The x component in the hex coordinate system.
- @par y The y component in the hex coordinate system.
- 
- @return proplist A proplist describing the hex.
- */
-global func CreateHex(int x, int y)
-{
-	return {
-		isHex = true,
-		X = x,
-		Y = y,
-	};
-}
-
-
-/**
  Creates an edge with the given coordinates.
  
  @par x The x component in the edge coordinate system.

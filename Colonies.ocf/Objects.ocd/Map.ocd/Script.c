@@ -2,7 +2,7 @@
   Representation of the map.
 */
 
-local hexes; // vector that contains the hexes, each hex is a proplist
+local hexes; // vector that contains the hexes, each hex is a an object of type GameMap_Hex
 local edges; // vector that contains the edges, each edge is a proplist
 local nodes; // vector that contains the nodes, each node is a proplist
 
