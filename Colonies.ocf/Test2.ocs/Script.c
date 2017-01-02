@@ -9,33 +9,33 @@ func Initialize()
 func DefaultScenario()
 {
 	// 3 tiles, topmost land row
-	Map()->AddHex(4, 4); // Wheat, Nr 4
-	Map()->AddHex(6, 6); // Wood, Nr 6
-	Map()->AddHex(8, 8); // Wheat, Nr 9 
+	Map()->AddHex(4, 4)->AddNumberChip(4); // Wheat
+	Map()->AddHex(6, 6)->AddNumberChip(6); // Wood
+	Map()->AddHex(8, 8)->AddNumberChip(9); // Wheat 
 
 	// 4 tiles
-	Map()->AddHex( 4, 2); // Loam, Nr 2
-	Map()->AddHex( 6, 4); // Wood, Nr 5
-	Map()->AddHex( 8, 6); // Sheep, Nr 12
-	Map()->AddHex(10, 8); // Sheep, Nr 4
+	Map()->AddHex( 4, 2)->AddNumberChip(2); // Loam
+	Map()->AddHex( 6, 4)->AddNumberChip(5); // Wood
+	Map()->AddHex( 8, 6)->AddNumberChip(12); // Sheep
+	Map()->AddHex(10, 8)->AddNumberChip(4); // Sheep
 
 	// 5 tiles, middle row
-	Map()->AddHex( 4, 0); // Sheep, Nr 9
-	Map()->AddHex( 6, 2); // Loam, Nr 8
-	Map()->AddHex( 8, 4); // Desert, Nr X
-	Map()->AddHex(10, 6); // Rock, Nr 8
-	Map()->AddHex(12, 8); // Sheep, Nr 10
+	Map()->AddHex( 4, 0)->AddNumberChip(9); // Sheep
+	Map()->AddHex( 6, 2)->AddNumberChip(8); // Loam
+	Map()->AddHex( 8, 4)->AddNumberChip(nil); // Desert
+	Map()->AddHex(10, 6)->AddNumberChip(8); // Rock
+	Map()->AddHex(12, 8)->AddNumberChip(10); // Shee
 
 	// 4 tiles
-	Map()->AddHex( 6, 0); // Wood, Nr 3
-	Map()->AddHex( 8, 2); // Rock, Nr 5
-	Map()->AddHex(10, 4); // Loam, Nr 10
-	Map()->AddHex(12, 6); // Wood, Nr 11
+	Map()->AddHex( 6, 0)->AddNumberChip(3); // Wood
+	Map()->AddHex( 8, 2)->AddNumberChip(5); // Rock
+	Map()->AddHex(10, 4)->AddNumberChip(10); // Loam
+	Map()->AddHex(12, 6)->AddNumberChip(11); // Wood
 
 	// 3 tiles, lowest row
-	Map()->AddHex( 8, 0); // Wheat, Nr 3
-	Map()->AddHex(10, 2); // Wheat, Nr 6
-	Map()->AddHex(12, 4); // Rock, Nr 11
+	Map()->AddHex( 8, 0)->AddNumberChip(3); // Wheat
+	Map()->AddHex(10, 2)->AddNumberChip(6); // Wheat
+	Map()->AddHex(12, 4)->AddNumberChip(11); // Rock
 	
 	// ports
 	Map()->AddHex( 2,  4); // Port, Rock, 2:1 
