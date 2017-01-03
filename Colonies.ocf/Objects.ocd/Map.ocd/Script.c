@@ -37,6 +37,8 @@ func GetHex(int x, int y)
 
  @par x The x component in hex coordinates.
  @par y The y component in hex coordinates. 
+ 
+ @return object The hex that was added.
  */
 func AddHex(int x, int y)
 {
@@ -46,6 +48,8 @@ func AddHex(int x, int y)
 	{
 		hexes[x][y] = CreateHex(x, y);
 	}
+	
+	return GetHex(x, y);
 }
 
 
