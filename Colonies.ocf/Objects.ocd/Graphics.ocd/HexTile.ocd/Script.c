@@ -30,9 +30,6 @@ local resource;
 /** Does the tile allow resource trade? */
 local allow_trade;
 
-/** The object graphics. */
-local graphics_object;
-
 
 /**
  Adds a number chip to the hex.
@@ -115,25 +112,3 @@ func CanTrade()
 	return this.allow_trade;
 }
 
-
-/**
- Decides how to draw the hex. Overload this function if you want to draw it differently.
- */
-func Draw()
-{
-	if (!graphics_object)
-	{
-		graphics_object = CreateObject(Graphics_HexTile, 0, 0, NO_OWNER);
-		graphics_object->SetPosition(GetXFromHexCoordinates(this.X, this.Y),
-		                             GetYFromHexCoordinates(this.X, this.Y));
-	}
-	
-	var graphics_name = "Sea";
-
-	if (GetResource() && GetNumberChip())
-	{
-		graphics_name = nil;
-	}
-
-	graphics_object->SetGraphics(graphics_name); //, Graphics_HexTile, 1, GFXOV_MODE_Base);
-}

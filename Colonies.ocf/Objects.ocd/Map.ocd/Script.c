@@ -173,3 +173,12 @@ func EnsureCoordinates(int x, int y, array list)
 		list[x] = [];
 	}
 }
+
+
+func DrawBoard()
+{
+	for (var hex in GetHexes())
+	{
+		hex->Draw();
+	}
+}

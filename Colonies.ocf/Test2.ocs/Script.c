@@ -90,6 +90,11 @@ func DefaultScenario()
 
 func DrawHexMap()
 {
+
+	Map()->DrawBoard();
+
+	return;
+
 	for (var hex_x = 0; hex_x < 20; hex_x += 2)
     for (var hex_y = 0; hex_y < 20; hex_y += 2)
     {
