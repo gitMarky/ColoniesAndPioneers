@@ -24,6 +24,12 @@ global func CreateHex(int x, int y)
 /** The number chip that was added on top of a hex. */
 local number_chip;
 
+/** The resource that is produced by the hex. */
+local resource;
+
+/** Does the tile allow resource trade? */
+local allow_trade;
+
 
 /**
  Adds a number chip to the hex.
@@ -78,4 +84,30 @@ func SetResource(id resource)
 func GetResource()
 {
 	return this.resource;
+}
+
+
+/**
+ Determines whether resources can be traded on this hex.
+ 
+ @par allow Set to {@c true} if you want to allow trade on this hex.
+            The trade rules are defined elsewhere.
+
+ @return object The hex itself, so that further functions can be called on it.
+ */
+func AllowTrade(bool allow)
+{
+	this.allow_trade = allow;
+	return this;
+}
+
+
+/**
+ Ask whether trade is allowed on this hex.
+ 
+ @return bool Returns {@c true} if trade is allowed.
+ */
+func CanTrade()
+{
+	return this.allow_trade;
 }

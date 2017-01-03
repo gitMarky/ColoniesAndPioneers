@@ -38,15 +38,15 @@ func DefaultScenario()
 	Map()->AddHex(12, 4)->SetResource(Resource_Ore)->AddNumberChip(11);
 
 	// ports
-	Map()->AddHex( 2,  4)->SetResource(Resource_Ore); // Port, Rock, 2:1 
-	Map()->AddHex( 6,  8)->SetResource(Resource_Wool); // Port, Sheep, 2:1 
-	Map()->AddHex(10, 10)->SetResource(nil); // Port, Any, 3:1 
-	Map()->AddHex(14, 10)->SetResource(nil); // Port, Any, 3:1 
-	Map()->AddHex(14,  6)->SetResource(Resource_Grain); // Port, Wheat, 2:1 
-	Map()->AddHex(12,  2)->SetResource(nil); // Port, Any, 3:1 
-	Map()->AddHex( 8, -2)->SetResource(Resource_Brick); // Port, Loam, 2:1 
-	Map()->AddHex( 4, -2)->SetResource(nil); // Port, Any, 3:1 
-	Map()->AddHex( 2,  0)->SetResource(Resource_Wood); // Port, Wood, 2:1 
+	Map()->AddHex( 2,  4)->AllowTrade(true)->SetResource(Resource_Ore); // Rock, 2:1 
+	Map()->AddHex( 6,  8)->AllowTrade(true)->SetResource(Resource_Wool); // Sheep, 2:1 
+	Map()->AddHex(10, 10)->AllowTrade(true)->SetResource(nil); // Any, 3:1 
+	Map()->AddHex(14, 10)->AllowTrade(true)->SetResource(nil); // Any, 3:1 
+	Map()->AddHex(14,  6)->AllowTrade(true)->SetResource(Resource_Grain); // Wheat, 2:1 
+	Map()->AddHex(12,  2)->AllowTrade(true)->SetResource(nil); // Any, 3:1 
+	Map()->AddHex( 8, -2)->AllowTrade(true)->SetResource(Resource_Brick); // Loam, 2:1 
+	Map()->AddHex( 4, -2)->AllowTrade(true)->SetResource(nil); // Any, 3:1 
+	Map()->AddHex( 2,  0)->AllowTrade(true)->SetResource(Resource_Wood); // Wood, 2:1 
 
 	// other sea tiles
 	Map()->AddHex( 4,  6);
