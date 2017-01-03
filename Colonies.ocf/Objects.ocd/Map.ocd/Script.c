@@ -20,15 +20,26 @@ func Initialize()
  @par x The x component in hex coordinates.
  @par y The y component in hex coordinates.
  
- @return proplist A hex, as created by {@link Global#CreateHex}.
-                  Returns {@c nil} if the hex was not added before.
-                  Add the hex via {@link GameMap#AddHex}.
+ @return object A hex, as created by {@link Global#CreateHex}.
+                Returns {@c nil} if the hex was not added before.
+                Add the hex via {@link GameMap#AddHex}.
  */
 func GetHex(int x, int y)
 {
 	EnsureCoordinates(x, y, hexes);	
-	
+
 	return hexes[x][y];
+}
+
+
+/**
+ Gets all hexes.
+ 
+ @return array An array of the hexes that exist.
+ */
+func GetHexes()
+{
+	return FindObjects(Find_ID(GameMap_Hex));
 }
 
 
@@ -42,14 +53,92 @@ func GetHex(int x, int y)
  */
 func AddHex(int x, int y)
 {
-	EnsureCoordinates(x, y);
-	
+	EnsureCoordinates(x, y, hexes);
+
 	if (!GetHex(x, y))
 	{
 		hexes[x][y] = CreateHex(x, y);
 	}
-	
+
 	return GetHex(x, y);
+}
+
+
+/**
+ Gets the edge in the given coordinates.
+ 
+ @par x The x component in edge coordinates.
+ @par y The y component in edge coordinates.
+ 
+ @return proplist An edge, as created by {@link Global#CreateEdge}.
+                  Returns {@c nil} if the edge was not added before.
+                  Add the edge via {@link GameMap#AddEdge}.
+ */
+func GetEdge(int x, int y)
+{
+	EnsureCoordinates(x, y, edges);	
+	
+	return edges[x][y];
+}
+
+
+/**
+ Adds an edge in the given coordinates.
+
+ @par x The x component in edge coordinates.
+ @par y The y component in edge coordinates. 
+
+ @return proplist The edge that was added.
+ */
+func AddEdge(int x, int y)
+{
+	EnsureCoordinates(x, y, edges);
+
+	if (!GetEdge(x, y))
+	{
+		edges[x][y] = CreateEdge(x, y);
+	}
+	
+	return GetEdge(x, y);
+}
+
+
+/**
+ Gets the node in the given coordinates.
+ 
+ @par x The x component in node coordinates.
+ @par y The y component in node coordinates.
+ 
+ @return proplist A node, as created by {@link Global#CreateNode}.
+                  Returns {@c nil} if the node was not added before.
+                  Add the edge via {@link GameMap#AddNode}.
+ */
+func GetNode(int x, int y)
+{
+	EnsureCoordinates(x, y, nodes);	
+
+	return nodes[x][y];
+}
+
+
+/**
+ Adds a node in the given coordinates.
+
+ @par x The x component in node coordinates.
+ @par y The y component in node coordinates. 
+
+ @return proplist The node that was added.
+ */
+func AddNode(int x, int y)
+{
+	EnsureCoordinates(x, y, nodes);
+	
+	if (!GetNode(x, y))
+	{
+		nodes[x][y] = CreateNode(x, y);
+	}
+	
+	return GetNode(x, y);
 }
 
 

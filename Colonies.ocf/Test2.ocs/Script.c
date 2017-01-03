@@ -58,6 +58,23 @@ func DefaultScenario()
 	Map()->AddHex( 6, -2);
 	Map()->AddHex( 2, -2);
 	Map()->AddHex( 2,  2);
+	
+	// Create edges and nodes
+	for (var hex in Map()->GetHexes())
+	{
+		var edges = GetEdgesAdjacentToHex(hex.X, hex.Y);
+		var nodes = GetNodesAdjacentToHex(hex.X, hex.Y);
+
+		for (var edge in edges)
+		{
+			Map()->AddEdge(edge[0], edge[1]);
+		}
+
+		for (var node in nodes)
+		{
+			Map()->AddNode(node[0], node[1]);
+		}
+	}
 }
 
 func DrawHexMap()
@@ -76,31 +93,35 @@ func DrawHexMap()
     	dummy->SetPosition(GetXFromHexCoordinates(hex_x, hex_y),
     	                   GetYFromHexCoordinates(hex_x, hex_y));
     	dummy->Message("@(%d/%d)", hex_x, hex_y);
-    	
-    	// Create edge centers
-    	var edge_centers = GetEdgesAdjacentToHex(hex_x, hex_y);
-    	for (var i = 0; i < 3; ++i)
+    }
+
+	for (var x = 0; x < 21; x += 1)
+    for (var y = 0; y < 21; y += 1)
+    {
+    	if (Map()->GetEdge(x, y) == nil)
     	{
-    		var x = edge_centers[i][0];
-    		var y = edge_centers[i][1];
-	    	var edge = CreateObject(Loam);
-	    	edge->SetCategory(C4D_StaticBack);
-	    	edge->SetPosition(GetXFromHexCoordinates(x, y),
-	    	                  GetYFromHexCoordinates(x, y));
-	    	edge->Message("@(%d/%d)", x, y);
+    		continue;
     	}
+
+    	var edge = CreateObject(Loam);
+    	edge->SetCategory(C4D_StaticBack);
+    	edge->SetPosition(GetXFromHexCoordinates(x, y),
+    	                  GetYFromHexCoordinates(x, y));
+    	edge->Message("@(%d/%d)", x, y);
+    }
     	
-    	// Create nodes
-    	var nodes = GetNodesAdjacentToHex(hex_x, hex_y);
-    	for (var i = 0; i < 2; ++i)
+	for (var x = 0; x < 21; x += 1)
+    for (var y = 0; y < 21; y += 1)
+    {
+    	if (Map()->GetNode(x, y) == nil)
     	{
-    		var x = nodes[i][0];
-    		var y = nodes[i][1];
-	    	var node = CreateObject(Ore);
-	    	node->SetCategory(C4D_StaticBack);
-	    	node->SetPosition(GetXFromNodeCoordinates(x, y),
-	    	                  GetYFromNodeCoordinates(x, y));
-	    	node->Message("@(%d/%d)", x, y);
+    		continue;
     	}
+
+    	var node = CreateObject(Ore);
+    	node->SetCategory(C4D_StaticBack);
+    	node->SetPosition(GetXFromNodeCoordinates(x, y),
+    	                  GetYFromNodeCoordinates(x, y));
+    	node->Message("@(%d/%d)", x, y);
     }
 }

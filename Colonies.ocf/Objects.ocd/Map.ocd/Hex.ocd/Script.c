@@ -111,3 +111,4 @@ func CanTrade()
 {
 	return this.allow_trade;
 }
+
