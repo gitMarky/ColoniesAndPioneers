@@ -134,6 +134,10 @@ func Draw()
 	{
 		graphics_name = nil;
 	}
+	
+	var width = graphics_object->GetTileWidth();
+	var height = graphics_object->GetTileHeight();
 
 	graphics_object->SetGraphics(graphics_name); //, Graphics_HexTile, 1, GFXOV_MODE_Base);
+	graphics_object->SetObjDrawTransform(width, 0, 0, 0, height);
 }

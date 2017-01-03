@@ -1,114 +1,45 @@
-/**
-  Representation of a hex in the map.
-*/
-
-#include GameMap_Element
 
 /**
- Creates a hex with the given coordinates.
- 
- @par x The x component in the hex coordinate system.
- @par y The y component in the hex coordinate system.
- 
- @return proplist A proplist describing the hex.
+ Gets the width factor for draw transformation.
+
+ @return int The factor for this tile for use with SetObjDrawTransform();
  */
-global func CreateHex(int x, int y)
+func GetTileWidth()
 {
-	var hex = CreateObject(GameMap_Hex, 0, 0, NO_OWNER);
-	hex.X = x;
-	hex.Y = y;
-	return hex;
+	return GetNodeFactor(1, 1000)[0];
+}
+
+/**
+ Gets the height factor for draw transformation.
+
+ @return int The factor for this tile for use with SetObjDrawTransform();
+ */
+func GetTileHeight()
+{
+	return (GetNodeFactor(0, 1000)[1] + GetNodeFactor(1, 1000)[1])/2;
 }
 
 
-/** The number chip that was added on top of a hex. */
-local number_chip;
-
-/** The resource that is produced by the hex. */
-local resource;
-
-/** Does the tile allow resource trade? */
-local allow_trade;
-
-
-/**
- Adds a number chip to the hex.
- 
- @par number The number. Usually this should be a number from 2 to 12,
-             depending on the rules of your scenario.
-             Setting the number to {@c nil} or to a number that cannot be
-             achieved by the resource dice will turn the tile unproductive.
-
- @return object The hex itself, so that further functions can be called on it.
- */
-func AddNumberChip(int number)
+func GetNodeFactor(int index, int precision)
 {
-	this.number_chip = number;
-	return this;
+	var nodes = [[0, -50], [42, -24], [252, 24], [0, 50], [-42, 24], [-42, -24]];
+	var hex_node = GetNodeCoordinates(index);
+	var node = nodes[index];
+	
+	var node_offset = [50, 0];
+	var hex_offset = [HEX_MAP_HEX_RADIUS - 1, 0];
+	
+	return [(hex_node[0] + hex_offset[0]) * precision / (node[0] + node_offset[0]),
+	        (hex_node[1] + hex_offset[1]) * precision / (node[1] + node_offset[1])];
 }
 
 
-/**
- Gets the number chip that is on this hex.
- 
- @return int The number. A number of {@c nil} indicates that this hex
-             is not productive.
- */
-func GetNumberChip()
+func GetNodeCoordinates(int index)
 {
-	return this.number_chip;
+	var node = GetNodesAdjacentToHex(0, 0)[index];
+	
+	var x = GetXFromNodeCoordinates(node[0], node[1]) - GetXFromHexCoordinates(0, 0);
+	var y = GetYFromNodeCoordinates(node[0], node[1]) - GetYFromHexCoordinates(0, 0);
+	
+	return [x, y];
 }
-
-
-/**
- Assigns a resource to the hex.
- 
- @par resource This resource will be produced in that
-               hex if the number is {@link GameMap_Hex#GetNumber}
-               is rolled.
-
- @return object The hex itself, so that further functions can be called on it.
- */
-func SetResource(id resource)
-{
-	this.resource = resource;
-	return this;
-}
-
-
-/**
- Gets the resource that is produced on this hex.
- 
- @return id The resource.
- */
-func GetResource()
-{
-	return this.resource;
-}
-
-
-/**
- Determines whether resources can be traded on this hex.
- 
- @par allow Set to {@c true} if you want to allow trade on this hex.
-            The trade rules are defined elsewhere.
-
- @return object The hex itself, so that further functions can be called on it.
- */
-func AllowTrade(bool allow)
-{
-	this.allow_trade = allow;
-	return this;
-}
-
-
-/**
- Ask whether trade is allowed on this hex.
- 
- @return bool Returns {@c true} if trade is allowed.
- */
-func CanTrade()
-{
-	return this.allow_trade;
-}
-
