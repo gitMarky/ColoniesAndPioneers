@@ -10,6 +10,28 @@ static const HEX_MAP_HEX_HEIGHT = 866 * HEX_MAP_HEX_RADIUS / 1000; // sqrt(3)*r/
 
 
 /**
+ The x offset of the hex map, in pixels.
+ 
+ @return int The offset, in pixels.
+ */
+global func GetXOffsetMap()
+{
+	return 0;
+}
+
+
+/**
+ The y offset of the hex map, in pixels.
+ 
+ @return int The offset, in pixels.
+ */
+global func GetYOffsetMap()
+{
+	return LandscapeHeight() / 2;
+}
+
+
+/**
  Converts hex coordinates to a global x coordinate.
  
  @par x The x component in hex coordinates.
@@ -19,7 +41,7 @@ static const HEX_MAP_HEX_HEIGHT = 866 * HEX_MAP_HEX_RADIUS / 1000; // sqrt(3)*r/
  */
 global func GetXFromHexCoordinates(int x, int y)
 {
-	return Sin(HEX_MAP_ALPHA, HEX_MAP_HEX_HEIGHT) * (x + y);
+	return Sin(HEX_MAP_ALPHA, HEX_MAP_HEX_HEIGHT) * (x + y) + GetXOffsetMap();
 }
 
 
@@ -33,7 +55,7 @@ global func GetXFromHexCoordinates(int x, int y)
  */
 global func GetYFromHexCoordinates(int x, int y)
 {
-	return Cos(HEX_MAP_ALPHA, HEX_MAP_HEX_HEIGHT) * (x - y);
+	return Cos(HEX_MAP_ALPHA, HEX_MAP_HEX_HEIGHT) * (x - y) + GetYOffsetMap();
 }
 
 
