@@ -43,3 +43,19 @@ func GetNodeCoordinates(int index)
 	
 	return [x, y];
 }
+
+
+/**
+ Draws a graphics layer of the tile in the correct size.
+ 
+ @par graphics_name The graphics name.
+ @par graphcis_definition The definition to take the graphics from.
+ @par layer The overlay id. Defaults to 1.
+ */
+func DrawLayer(string graphics_name, id graphics_definition, int layer)
+{
+	layer = layer ?? 1;
+
+	SetGraphics(graphics_name, graphics_definition ?? GetID(), layer, GFXOV_MODE_Base);
+	SetObjDrawTransform(this->GetTileWidth(), 0, 0, 0, this->GetTileHeight(), 0, layer);
+}

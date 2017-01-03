@@ -104,16 +104,15 @@ func DrawElement()
 {
 	_inherited(...);
 
-	var graphics_name = "Sea";
-
+	var graphics_name;
 	if (GetResource() && GetNumberChip())
 	{
-		graphics_name = nil;
+		graphics_name = "Land";
+	}
+	else
+	{
+ 		graphics_name = "Sea";
 	}
 
-	var width = GetGraphicsObject()->GetTileWidth();
-	var height = GetGraphicsObject()->GetTileHeight();
-
-	GetGraphicsObject()->SetGraphics(graphics_name); //, Graphics_HexTile, 1, GFXOV_MODE_Base);
-	GetGraphicsObject()->SetObjDrawTransform(width, 0, 0, 0, height);
+	GetGraphicsObject()->DrawLayer(graphics_name);
 }
