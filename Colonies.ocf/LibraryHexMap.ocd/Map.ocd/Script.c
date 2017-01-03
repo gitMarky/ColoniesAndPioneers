@@ -175,10 +175,10 @@ func EnsureCoordinates(int x, int y, array list)
 }
 
 
-func DrawBoard()
+func DrawElements()
 {
 	for (var hex in GetHexes())
 	{
-		hex->Draw();
+		hex->DrawElement();
 	}
 }

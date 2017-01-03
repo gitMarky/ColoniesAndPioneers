@@ -91,7 +91,7 @@ func DefaultScenario()
 func DrawHexMap()
 {
 
-	Map()->DrawBoard();
+	Map()->DrawElements();
 
 	return;
 

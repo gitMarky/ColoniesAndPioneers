@@ -1,8 +1,8 @@
 /**
  Expansion of the hex data object.
- 
  */
 
+#appendto GameMap_Hex
 
 /** The number chip that was added on top of a hex. */
 local number_chip;
@@ -102,8 +102,10 @@ func CanTrade()
 /**
  Decides how to draw the hex. Overload this function if you want to draw it differently.
  */
-func Draw()
+func DrawElement()
 {
+	_inherited(...);
+
 	if (!graphics_object)
 	{
 		graphics_object = CreateObject(Graphics_HexTile, 0, 0, NO_OWNER);
