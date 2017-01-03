@@ -5,8 +5,16 @@
  */
 
 static const HEX_MAP_ALPHA = 30; // degrees
-static const HEX_MAP_HEX_RADIUS = 50; // pixels
-static const HEX_MAP_HEX_HEIGHT = 866 * HEX_MAP_HEX_RADIUS / 1000; // sqrt(3)*r/2 pixels
+
+global func HexMap_HexRadius()
+{
+	return 50; // pixels
+}
+
+global func HexMap_HexHeight()
+{
+	return 866 * HexMap_HexRadius() / 1000; // sqrt(3)*r/2 pixels;
+}
 
 
 /**
@@ -41,7 +49,7 @@ global func GetYOffsetMap()
  */
 global func GetXFromHexCoordinates(int x, int y)
 {
-	return Sin(HEX_MAP_ALPHA, HEX_MAP_HEX_HEIGHT) * (x + y) + GetXOffsetMap();
+	return Sin(HEX_MAP_ALPHA, HexMap_HexHeight()) * (x + y) + GetXOffsetMap();
 }
 
 
@@ -55,7 +63,7 @@ global func GetXFromHexCoordinates(int x, int y)
  */
 global func GetYFromHexCoordinates(int x, int y)
 {
-	return Cos(HEX_MAP_ALPHA, HEX_MAP_HEX_HEIGHT) * (x - y) + GetYOffsetMap();
+	return Cos(HEX_MAP_ALPHA, HexMap_HexHeight()) * (x - y) + GetYOffsetMap();
 }
 
 
@@ -85,7 +93,7 @@ global func GetXFromNodeCoordinates(int x, int y)
 global func GetYFromNodeCoordinates(int x, int y)
 {
 	var mod = GetNodeCoordinateModifiers(x, y);
-	return GetYFromHexCoordinates(mod.x, mod.y) + mod.sign * HEX_MAP_HEX_RADIUS;
+	return GetYFromHexCoordinates(mod.x, mod.y) + mod.sign * HexMap_HexRadius();
 }
 
 

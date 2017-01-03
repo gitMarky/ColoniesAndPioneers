@@ -8,8 +8,8 @@ protected func InitializeMap(proplist map)
 	
 	var hex_max = 20;
 
-	var y_max = HEX_MAP_HEX_HEIGHT * hex_max;
-	var x_max = HEX_MAP_HEX_RADIUS * hex_max;
+	var y_max = HexMap_HexHeight() * hex_max;
+	var x_max = HexMap_HexRadius() * hex_max;
 
 	var map_width = x_max / map_zoom;
 	var map_height = y_max / map_zoom;

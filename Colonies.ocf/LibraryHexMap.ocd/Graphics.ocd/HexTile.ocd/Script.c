@@ -27,7 +27,7 @@ func GetNodeFactor(int index, int precision)
 	var node = nodes[index];
 	
 	var node_offset = [50, 0];
-	var hex_offset = [HEX_MAP_HEX_RADIUS - 1, 0];
+	var hex_offset = [HexMap_HexRadius() - 1, 0];
 	
 	return [(hex_node[0] + hex_offset[0]) * precision / (node[0] + node_offset[0]),
 	        (hex_node[1] + hex_offset[1]) * precision / (node[1] + node_offset[1])];
