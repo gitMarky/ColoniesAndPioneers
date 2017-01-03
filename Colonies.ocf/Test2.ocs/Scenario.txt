@@ -2,12 +2,16 @@
 Version=8
 
 [Player1]
+Crew=Game_Cursor
 
 [Player2]
+Crew=Game_Cursor
 
 [Player3]
+Crew=Game_Cursor
 
 [Player4]
+Crew=Game_Cursor
 
 [Landscape]
 MapWidth=100,0,64,10000

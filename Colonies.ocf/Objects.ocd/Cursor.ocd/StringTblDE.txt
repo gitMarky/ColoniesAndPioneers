@@ -1,0 +1,1 @@
+Description=Steuert die Auswahl von Spielelementen. 
