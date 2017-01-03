@@ -6,6 +6,17 @@ func Initialize()
 }
 
 
+func InitializePlayer(int player, int x, int y, object base, int team, id extra_data)
+{
+	var cursor = GetHiRank(player);
+	
+	if (cursor)
+	{
+		cursor->SetPosition(LandscapeWidth() / 2, LandscapeHeight() / 2);
+	}
+}
+
+
 func DefaultScenario()
 {
 	// 3 tiles, topmost land row
