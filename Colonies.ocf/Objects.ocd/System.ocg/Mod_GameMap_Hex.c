@@ -2,6 +2,7 @@
  Expansion of the hex data object.
  */
 
+#include Plugin_Element_GraphicsObject
 #appendto GameMap_Hex
 
 /** The number chip that was added on top of a hex. */
@@ -12,9 +13,6 @@ local resource;
 
 /** Does the tile allow resource trade? */
 local allow_trade;
-
-/** The object graphics. */
-local graphics_object;
 
 
 /**
@@ -106,23 +104,16 @@ func DrawElement()
 {
 	_inherited(...);
 
-	if (!graphics_object)
-	{
-		graphics_object = CreateObject(Graphics_HexTile, 0, 0, NO_OWNER);
-		graphics_object->SetPosition(GetXFromHexCoordinates(this.X, this.Y),
-		                             GetYFromHexCoordinates(this.X, this.Y));
-	}
-
 	var graphics_name = "Sea";
 
 	if (GetResource() && GetNumberChip())
 	{
 		graphics_name = nil;
 	}
-	
-	var width = graphics_object->GetTileWidth();
-	var height = graphics_object->GetTileHeight();
 
-	graphics_object->SetGraphics(graphics_name); //, Graphics_HexTile, 1, GFXOV_MODE_Base);
-	graphics_object->SetObjDrawTransform(width, 0, 0, 0, height);
+	var width = GetGraphicsObject()->GetTileWidth();
+	var height = GetGraphicsObject()->GetTileHeight();
+
+	GetGraphicsObject()->SetGraphics(graphics_name); //, Graphics_HexTile, 1, GFXOV_MODE_Base);
+	GetGraphicsObject()->SetObjDrawTransform(width, 0, 0, 0, height);
 }

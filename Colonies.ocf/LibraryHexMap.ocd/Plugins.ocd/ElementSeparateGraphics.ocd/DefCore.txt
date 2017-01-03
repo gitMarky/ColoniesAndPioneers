@@ -1,0 +1,5 @@
+[DefCore]
+id=Plugin_Element_GraphicsObject
+Version=8,0
+Category=C4D_StaticBack
+HideInCreator=true
