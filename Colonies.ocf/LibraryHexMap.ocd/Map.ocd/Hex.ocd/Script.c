@@ -1,8 +1,11 @@
 /**
   Representation of a hex in the map.
+  
+  This is a data structure, the graphical representation happens via another object.
 */
 
 #include GameMap_Element
+
 
 /**
  Creates a hex with the given coordinates.
@@ -20,124 +23,3 @@ global func CreateHex(int x, int y)
 	return hex;
 }
 
-
-/** The number chip that was added on top of a hex. */
-local number_chip;
-
-/** The resource that is produced by the hex. */
-local resource;
-
-/** Does the tile allow resource trade? */
-local allow_trade;
-
-/** The object graphics. */
-local graphics_object;
-
-
-/**
- Adds a number chip to the hex.
- 
- @par number The number. Usually this should be a number from 2 to 12,
-             depending on the rules of your scenario.
-             Setting the number to {@c nil} or to a number that cannot be
-             achieved by the resource dice will turn the tile unproductive.
-
- @return object The hex itself, so that further functions can be called on it.
- */
-func AddNumberChip(int number)
-{
-	this.number_chip = number;
-	return this;
-}
-
-
-/**
- Gets the number chip that is on this hex.
- 
- @return int The number. A number of {@c nil} indicates that this hex
-             is not productive.
- */
-func GetNumberChip()
-{
-	return this.number_chip;
-}
-
-
-/**
- Assigns a resource to the hex.
- 
- @par resource This resource will be produced in that
-               hex if the number is {@link GameMap_Hex#GetNumber}
-               is rolled.
-
- @return object The hex itself, so that further functions can be called on it.
- */
-func SetResource(id resource)
-{
-	this.resource = resource;
-	return this;
-}
-
-
-/**
- Gets the resource that is produced on this hex.
- 
- @return id The resource.
- */
-func GetResource()
-{
-	return this.resource;
-}
-
-
-/**
- Determines whether resources can be traded on this hex.
- 
- @par allow Set to {@c true} if you want to allow trade on this hex.
-            The trade rules are defined elsewhere.
-
- @return object The hex itself, so that further functions can be called on it.
- */
-func AllowTrade(bool allow)
-{
-	this.allow_trade = allow;
-	return this;
-}
-
-
-/**
- Ask whether trade is allowed on this hex.
- 
- @return bool Returns {@c true} if trade is allowed.
- */
-func CanTrade()
-{
-	return this.allow_trade;
-}
-
-
-/**
- Decides how to draw the hex. Overload this function if you want to draw it differently.
- */
-func Draw()
-{
-	if (!graphics_object)
-	{
-		graphics_object = CreateObject(Graphics_HexTile, 0, 0, NO_OWNER);
-		graphics_object->SetPosition(GetXFromHexCoordinates(this.X, this.Y),
-		                             GetYFromHexCoordinates(this.X, this.Y));
-	}
-	
-	var graphics_name = "Sea";
-
-	if (GetResource() && GetNumberChip())
-	{
-		graphics_name = nil;
-	}
-	
-	var width = graphics_object->GetTileWidth();
-	var height = graphics_object->GetTileHeight();
-
-	graphics_object->SetGraphics(graphics_name); //, Graphics_HexTile, 1, GFXOV_MODE_Base);
-	graphics_object->SetObjDrawTransform(width, 0, 0, 0, height);
-}
