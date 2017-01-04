@@ -28,8 +28,8 @@ func Initialize()
     	var nodes = GetNodesAdjacentToHex(hex_x, hex_y);
     	for (var i = 0; i < 2; ++i)
     	{
-    		var x = nodes[i][0];
-    		var y = nodes[i][1];
+    		var x = nodes[i].X;
+    		var y = nodes[i].Y;
 	    	var node = CreateObject(Ore);
 	    	node->SetCategory(C4D_StaticBack);
 	    	node->SetPosition(GetXFromNodeCoordinates(x, y),

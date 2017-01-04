@@ -138,7 +138,7 @@ global func CreateNode(int x, int y)
  @par modifiers An array of modifiers that contains coordinates
                 that are relative to {@c x} and {@c y}.
 
- @return An array where {@c x} and {@c y} where added to each component
+ @return An array of proplists where {@c x} and {@c y} where added to each component
          in the {@c modifiers} array.
  */
 global func GetCoordinateArray(int x, int y, array modifiers)
@@ -146,7 +146,7 @@ global func GetCoordinateArray(int x, int y, array modifiers)
 	var coordinates = [];
 	for (var i = 0; i < GetLength(modifiers); ++i)
 	{
-		coordinates[i] = [modifiers[i][0] + x, modifiers[i][1] + y];
+		coordinates[i] = {X = modifiers[i][0] + x, Y = modifiers[i][1] + y};
 	}
 	return coordinates;
 }

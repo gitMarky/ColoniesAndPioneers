@@ -78,12 +78,12 @@ func DefaultScenario()
 
 		for (var edge in edges)
 		{
-			Map()->AddEdge(edge[0], edge[1]);
+			Map()->AddEdge(edge.X, edge.Y);
 		}
 
 		for (var node in nodes)
 		{
-			Map()->AddNode(node[0], node[1]);
+			Map()->AddNode(node.Y, node.X);
 		}
 	}
 }

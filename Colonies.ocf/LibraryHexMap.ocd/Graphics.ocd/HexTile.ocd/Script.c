@@ -6,7 +6,7 @@
  */
 func GetTileWidth()
 {
-	return GetNodeFactor(1, 1000)[0];
+	return GetNodeFactor(1, 1000).X;
 }
 
 /**
@@ -16,7 +16,7 @@ func GetTileWidth()
  */
 func GetTileHeight()
 {
-	return (GetNodeFactor(0, 1000)[1] + GetNodeFactor(1, 1000)[1])/2;
+	return (GetNodeFactor(0, 1000).Y + GetNodeFactor(1, 1000).Y)/2;
 }
 
 
@@ -26,11 +26,11 @@ func GetNodeFactor(int index, int precision)
 	var hex_node = GetNodeCoordinates(index);
 	var node = nodes[index];
 	
-	var node_offset = [50, 0];
-	var hex_offset = [HexMap_HexRadius() - 1, 0];
+	var node_offset = {X = 50, Y = 0};
+	var hex_offset = {X = HexMap_HexRadius() - 1, Y = 0};
 	
-	return [(hex_node[0] + hex_offset[0]) * precision / (node[0] + node_offset[0]),
-	        (hex_node[1] + hex_offset[1]) * precision / (node[1] + node_offset[1])];
+	return {X = (hex_node.X + hex_offset.X) * precision / (node[0] + node_offset.X),
+	        Y = (hex_node.Y + hex_offset.Y) * precision / (node[1] + node_offset.Y)};
 }
 
 
@@ -38,10 +38,10 @@ func GetNodeCoordinates(int index)
 {
 	var node = GetNodesAdjacentToHex(0, 0)[index];
 	
-	var x = GetXFromNodeCoordinates(node[0], node[1]) - GetXFromHexCoordinates(0, 0);
-	var y = GetYFromNodeCoordinates(node[0], node[1]) - GetYFromHexCoordinates(0, 0);
+	var x = GetXFromNodeCoordinates(node.X, node.Y) - GetXFromHexCoordinates(0, 0);
+	var y = GetYFromNodeCoordinates(node.X, node.Y) - GetYFromHexCoordinates(0, 0);
 	
-	return [x, y];
+	return {X = x, Y = y};
 }
 
 
