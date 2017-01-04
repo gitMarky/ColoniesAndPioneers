@@ -93,7 +93,7 @@ func DrawHexMap()
 
 	Map()->DrawElements();
 
-	return;
+	//return;
 
 	for (var hex_x = 0; hex_x < 20; hex_x += 2)
     for (var hex_y = 0; hex_y < 20; hex_y += 2)
@@ -123,7 +123,7 @@ func DrawHexMap()
     	edge->SetCategory(C4D_StaticBack);
     	edge->SetPosition(GetXFromHexCoordinates(x, y),
     	                  GetYFromHexCoordinates(x, y));
-    	edge->Message("@(%d/%d)", x, y);
+    	//edge->Message("@(%d/%d)", x, y);
     }
     	
 	for (var x = 0; x < 21; x += 1)
@@ -140,6 +140,6 @@ func DrawHexMap()
     	node->SetCategory(C4D_StaticBack);
     	node->SetPosition(x2,
     	                  y2);
-    	node->Message("@(%d/%d) (%d/%d)", x, y, x2, y2);
+    	//node->Message("@(%d/%d) (%d/%d)", x, y, x2, y2);
     }
 }

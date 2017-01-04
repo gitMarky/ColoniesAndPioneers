@@ -49,7 +49,7 @@ global func GetYOffsetMap()
  */
 global func GetXFromHexCoordinates(int x, int y)
 {
-	return Sin(HEX_MAP_ALPHA, HexMap_HexHeight()) * (x + y) + GetXOffsetMap();
+	return Sin(HEX_MAP_ALPHA, HexMap_HexHeight()) * (y + x) + GetXOffsetMap();
 }
 
 
@@ -63,7 +63,7 @@ global func GetXFromHexCoordinates(int x, int y)
  */
 global func GetYFromHexCoordinates(int x, int y)
 {
-	return Cos(HEX_MAP_ALPHA, HexMap_HexHeight()) * (x - y) + GetYOffsetMap();
+	return Cos(HEX_MAP_ALPHA, HexMap_HexHeight()) * (y - x) + GetYOffsetMap();
 }
 
 
@@ -119,17 +119,17 @@ global func GetNodeCoordinateModifiers(int x, int y)
 	var y_mod;
 	var x_mod;
 	
-	if (x_even && !y_even)
+	if (!x_even && y_even)
 	{
 		sign = -1;
-		x_mod = +0;
-		y_mod = -1;
-	}
-	else if (!x_even && y_even)
-	{
-		sign = +1;
 		x_mod = -1;
 		y_mod = +0;
+	}
+	else if (x_even && !y_even)
+	{
+		sign = +1;
+		x_mod = +0;
+		y_mod = -1;
 	}
 	else
 	{
