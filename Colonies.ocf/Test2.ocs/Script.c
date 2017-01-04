@@ -2,7 +2,7 @@
 func Initialize()
 {
 	DefaultScenario();
-	DrawHexMap();
+	ScheduleCall(nil, this.DrawHexMap, 1, 1);
 }
 
 
@@ -83,7 +83,7 @@ func DefaultScenario()
 
 		for (var node in nodes)
 		{
-			Map()->AddNode(node.Y, node.X);
+			Map()->AddNode(node.X, node.Y);
 		}
 	}
 }
@@ -108,7 +108,7 @@ func DrawHexMap()
     	dummy->SetCategory(C4D_StaticBack);
     	dummy->SetPosition(GetXFromHexCoordinates(hex_x, hex_y),
     	                   GetYFromHexCoordinates(hex_x, hex_y));
-    	//dummy->Message("@(%d/%d)", hex_x, hex_y);
+    	dummy->Message("@(%d/%d)", hex_x, hex_y);
     }
 
 	for (var x = 0; x < 21; x += 1)
@@ -123,7 +123,7 @@ func DrawHexMap()
     	edge->SetCategory(C4D_StaticBack);
     	edge->SetPosition(GetXFromHexCoordinates(x, y),
     	                  GetYFromHexCoordinates(x, y));
-    	//edge->Message("@(%d/%d)", x, y);
+    	edge->Message("@(%d/%d)", x, y);
     }
     	
 	for (var x = 0; x < 21; x += 1)
@@ -135,9 +135,11 @@ func DrawHexMap()
     	}
 
     	var node = CreateObject(Ore);
+    	var x2 = GetXFromNodeCoordinates(x, y);
+    	var y2 = GetYFromNodeCoordinates(x, y);
     	node->SetCategory(C4D_StaticBack);
-    	node->SetPosition(GetXFromNodeCoordinates(x, y),
-    	                  GetYFromNodeCoordinates(x, y));
-    	//node->Message("@(%d/%d)", x, y);
+    	node->SetPosition(x2,
+    	                  y2);
+    	node->Message("@(%d/%d) (%d/%d)", x, y, x2, y2);
     }
 }

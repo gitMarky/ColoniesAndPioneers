@@ -15,8 +15,8 @@ func Initialize()
     	var edge_centers = GetEdgesAdjacentToHex(hex_x, hex_y);
     	for (var i = 0; i < 3; ++i)
     	{
-    		var x = edge_centers[i][0];
-    		var y = edge_centers[i][1];
+    		var x = edge_centers[i].X;
+    		var y = edge_centers[i].Y;
 	    	var edge = CreateObject(Loam);
 	    	edge->SetCategory(C4D_StaticBack);
 	    	edge->SetPosition(GetXFromHexCoordinates(x, y),

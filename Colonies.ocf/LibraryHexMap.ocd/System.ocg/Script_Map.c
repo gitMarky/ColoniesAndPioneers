@@ -23,104 +23,104 @@ static const MAP_NODE_NORTH_WEST = 5;
 // Hexes and their surroundings
 
 /** Coordinate modifiers for adjacent hexes of a hex. */
-static const MAP_HEX_ADJACENT_HEX_COORDINATES = [[+0, +2],
-                                                 [+2, +2],
-                                                 [+2, +0],
-                                                 [+0, -2],
-                                                 [-2, -2],
-                                                 [-2, 0]];
+static const MAP_HEX_ADJACENT_HEX_COORDINATES = [{X = +0, Y = +2},
+                                                 {X = +2, Y = +2},
+                                                 {X = +2, Y = +0},
+                                                 {X = +0, Y = -2},
+                                                 {X = -2, Y = -2},
+                                                 {X = -2, Y = +0}];
 
 /** Coordinate modifiers for nodes of a hex. */
-static const MAP_HEX_ADJACENT_NODE_COORDINATES = [[+0, +1],
-                                                  [+1, +2],
-                                                  [+2, +1],
-                                                  [+1, +0],
-                                                  [+0, -1],
-                                                  [-1, +0]];
+static const MAP_HEX_ADJACENT_NODE_COORDINATES = [{X = +0, Y = +1},
+                                                  {X = +1, Y = +2},
+                                                  {X = +2, Y = +1},
+                                                  {X = +1, Y = +0},
+                                                  {X = +0, Y = -1},
+                                                  {X = -1, Y = +0}];
 
 /** Coordinate modifiers for edges of a hex. */
-static const MAP_HEX_ADJACENT_EDGE_COORDINATES = [[+0, +1],
-                                                  [+1, +1],
-                                                  [+1, +0],
-                                                  [+0, -1],
-                                                  [-1, -1],
-                                                  [-1, +0]];
+static const MAP_HEX_ADJACENT_EDGE_COORDINATES = [{X = +0, Y = +1},
+                                                  {X = +1, Y = +1},
+                                                  {X = +1, Y = +0},
+                                                  {X = +0, Y = -1},
+                                                  {X = -1, Y = -1},
+                                                  {X = -1, Y = +0}];
 
 // Nodes and their surroundings
 
 /** Coordinate modifiers for adjacent hexes of a node, where the x coordinate is even and the y coordinate is odd. */
-static const MAP_NODE_EVEN_ODD_ADJACENT_HEX_COORDINATES = [[-1, +0],
-                                                           [+1, +0],
-                                                           [-1, -1]];
+static const MAP_NODE_EVEN_ODD_ADJACENT_HEX_COORDINATES = [{X = -1, Y = +0},
+                                                           {X = +1, Y = +0},
+                                                           {X = -1, Y = -1}];
 
 /** Coordinate modifiers for adjacent nodes of a node, where the x coordinate is even and the y coordinate is odd. */
-static const MAP_NODE_EVEN_ODD_ADJACENT_NODE_COORDINATES = [[-1, -1],
-                                                            [+1, +1],
-                                                            [+1, -1]];
+static const MAP_NODE_EVEN_ODD_ADJACENT_NODE_COORDINATES = [{X = -1, Y = -1},
+                                                            {X = +1, Y = +1},
+                                                            {X = +1, Y = -1}];
 
 /** Coordinate modifiers for adjacent edges of a node, where the x coordinate is even and the y coordinate is odd. */
-static const MAP_NODE_EVEN_ODD_ADJACENT_EDGE_COORDINATES = [[-1, -1],
-                                                            [+0, +0],
-                                                            [+0, -1]];
+static const MAP_NODE_EVEN_ODD_ADJACENT_EDGE_COORDINATES = [{X = -1, Y = -1},
+                                                            {X = +0, Y = +0},
+                                                            {X = +0, Y = -1}];
 
 /** Coordinate modifiers for adjacent hexes of a node, where the x coordinate is odd and the y coordinate is even. */
-static const MAP_NODE_ODD_EVEN_ADJACENT_HEX_COORDINATES = [[-2, -1],
-                                                           [+0, +1],
-                                                           [+0, -1]];
+static const MAP_NODE_ODD_EVEN_ADJACENT_HEX_COORDINATES = [{X = -2, Y = -1},
+                                                           {X = +0, Y = +1},
+                                                           {X = +0, Y = -1}];
 
 /** Coordinate modifiers for adjacent nodes of a node, where the x coordinate is odd and the y coordinate is even. */
-static const MAP_NODE_ODD_EVEN_ADJACENT_NODE_COORDINATES = [[-1, +1],
-                                                            [+1, +1],
-                                                            [-1, -1]];
+static const MAP_NODE_ODD_EVEN_ADJACENT_NODE_COORDINATES = [{X = -1, Y = +1},
+                                                            {X = +1, Y = +1},
+                                                            {X = -1, Y = -1}];
 
 /** Coordinate modifiers for adjacent edges of a node, where the x coordinate is odd and the y coordinate is even. */
-static const MAP_NODE_ODD_EVEN_ADJACENT_EDGE_COORDINATES = [[-1, +0],
-                                                            [+0, +0],
-                                                            [-1, -1]];
+static const MAP_NODE_ODD_EVEN_ADJACENT_EDGE_COORDINATES = [{X = -1, Y = +0},
+                                                            {X = +0, Y = +0},
+                                                            {X = -1, Y = -1}];
 
 // Edges and their surroundings
 
 /** Coordinate modifiers for adjacent hexes of an edge, where the x coordinate is even and the y coordinate is odd. */
-static const MAP_EDGE_EVEN_ODD_ADJACENT_HEX_COORDINATES = [[-1, +0],
-                                                           [+1, +0]];
+static const MAP_EDGE_EVEN_ODD_ADJACENT_HEX_COORDINATES = [{X = -1, Y = +0},
+                                                           {X = +1, Y = +0}];
 
 /** Coordinate modifiers for adjacent nodes of an edge, where the x coordinate is even and the y coordinate is odd. */
-static const MAP_EDGE_EVEN_ODD_ADJACENT_NODE_COORDINATES = [[+0, +0],
-                                                            [+1, +1]];
+static const MAP_EDGE_EVEN_ODD_ADJACENT_NODE_COORDINATES = [{X = +0, Y = +0},
+                                                            {X = +1, Y = +1}];
 
 /** Coordinate modifiers for adjacent edges of an edge, where the x coordinate is even and the y coordinate is odd. */
-static const MAP_EDGE_EVEN_ODD_ADJACENT_EDGE_COORDINATES = [[-1, -1],
-                                                            [+0, -1],
-                                                            [+0, +1],
-                                                            [+1, +1]];
+static const MAP_EDGE_EVEN_ODD_ADJACENT_EDGE_COORDINATES = [{X = -1, Y = -1},
+                                                            {X = +0, Y = -1},
+                                                            {X = +0, Y = +1},
+                                                            {X = +1, Y = +1}];
 
 /** Coordinate modifiers for adjacent hexes of an edge, where the x coordinate is odd and the y coordinate is even. */
-static const MAP_EDGE_ODD_EVEN_ADJACENT_HEX_COORDINATES = [[+0, -1],
-                                                           [+0, +1]];
+static const MAP_EDGE_ODD_EVEN_ADJACENT_HEX_COORDINATES = [{X = +0, Y = -1},
+                                                           {X = +0, Y = +1}];
 
 /** Coordinate modifiers for adjacent nodes of an edge, where the x coordinate is odd and the y coordinate is even. */
-static const MAP_EDGE_ODD_EVEN_ADJACENT_NODE_COORDINATES = [[+0, +0],
-                                                            [+1, +1]];
+static const MAP_EDGE_ODD_EVEN_ADJACENT_NODE_COORDINATES = [{X = +0, Y = +0},
+                                                            {X = +1, Y = +1}];
 
 /** Coordinate modifiers for adjacent edges of an edge, where the x coordinate is odd and the y coordinate is even. */
-static const MAP_EDGE_ODD_EVEN_ADJACENT_EDGE_COORDINATES = [[-1, -1],
-                                                            [-1, +0],
-                                                            [+1, +1],
-                                                            [+1, +0]];
+static const MAP_EDGE_ODD_EVEN_ADJACENT_EDGE_COORDINATES = [{X = -1, Y = -1},
+                                                            {X = -1, Y = +0},
+                                                            {X = +1, Y = +1},
+                                                            {X = +1, Y = +0}];
 
 /** Coordinate modifiers for adjacent hexes of an edge, where the x coordinate is even and the y coordinate is even. */
-static const MAP_EDGE_EVEN_EVEN_ADJACENT_HEX_COORDINATES = [[-1, -1], 
-                                                            [+1, +1]];
+static const MAP_EDGE_EVEN_EVEN_ADJACENT_HEX_COORDINATES = [{X = -1, Y = -1}, 
+                                                            {X = +1, Y = +1}];
 
 /** Coordinate modifiers for adjacent nodes of an edge, where the x coordinate is even and the y coordinate is even. */
-static const MAP_EDGE_EVEN_EVEN_ADJACENT_NODE_COORDINATES = [[+0, +1],
-                                                            [+1, +0]];
+static const MAP_EDGE_EVEN_EVEN_ADJACENT_NODE_COORDINATES = [{X = +0, Y = +1},
+                                                             {X = +1, Y = +0}];
 
 /** Coordinate modifiers for adjacent edges of an edge, where the x coordinate is even and the y coordinate is even. */
-static const MAP_EDGE_EVEN_EVEN_ADJACENT_EDGE_COORDINATES = [[-1, +0],
-                                                             [+0, +1],
-                                                             [+1, +0],
-                                                             [+0, -1]];
+static const MAP_EDGE_EVEN_EVEN_ADJACENT_EDGE_COORDINATES = [{X = -1, Y = +0},
+                                                             {X = +0, Y = +1},
+                                                             {X = +1, Y = +0},
+                                                             {X = +0, Y = -1}];
 
 // functions
 
@@ -188,7 +188,7 @@ global func GetCoordinateArray(int x, int y, array modifiers)
 	var coordinates = [];
 	for (var i = 0; i < GetLength(modifiers); ++i)
 	{
-		coordinates[i] = {X = modifiers[i][0] + x, Y = modifiers[i][1] + y};
+		coordinates[i] = {X = modifiers[i].X + x, Y = modifiers[i].Y + y};
 	}
 	return coordinates;
 }
