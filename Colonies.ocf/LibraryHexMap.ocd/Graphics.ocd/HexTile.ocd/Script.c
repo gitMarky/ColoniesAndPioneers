@@ -55,7 +55,19 @@ func GetNodeCoordinates(int index)
 func DrawLayer(string graphics_name, id graphics_definition, int layer)
 {
 	layer = layer ?? 1;
+	
+	var r = -Map()->GetDrawRotation();
+	var prec = Map()->GetDrawRotationPrecision();
+	
+	var factor = 1000;
+
+	var fsin = Sin(r, factor, prec);
+	var fcos = Cos(r, factor, prec);
 
 	SetGraphics(graphics_name, graphics_definition ?? GetID(), layer, GFXOV_MODE_Base);
-	SetObjDrawTransform(this->GetTileWidth(), 0, 0, 0, this->GetTileHeight(), 0, layer);
+//	SetObjDrawTransform(this->GetTileWidth(), 0, 0, 0, this->GetTileHeight(), 0, layer);
+  	SetObjDrawTransform(+fcos * this->GetTileWidth() / factor,
+  	                    +fsin * this->GetTileHeight() / factor, 0,
+  	                    -fsin * this->GetTileWidth() / factor,
+  	                    +fcos * this->GetTileHeight() / factor, 0, layer);
 }

@@ -8,11 +8,18 @@ local hexes; // vector that contains the hexes, each hex is a an object of type 
 local edges; // vector that contains the edges, each edge is a proplist
 local nodes; // vector that contains the nodes, each node is a proplist
 
+local draw;
+
 func Initialize()
 {
 	hexes = [];
 	edges = [];
 	nodes = [];
+	
+	draw = {
+		rotation = 0,
+		rot_prec = 1,
+	};
 }
 
 
@@ -213,7 +220,9 @@ func DrawElements()
  */
 func GetXFromHexCoordinates(int x, int y)
 {
-	return GetXFromHexCoordinatesDefault(x, y);
+	var map_x = GetXFromHexCoordinatesDefault(x, y);
+	var map_y = GetYFromHexCoordinatesDefault(x, y);
+	return Vector->Rotate([map_x, map_y], draw.rotation, draw.rot_prec)[0];
 }
 
 
@@ -227,7 +236,9 @@ func GetXFromHexCoordinates(int x, int y)
  */
 func GetYFromHexCoordinates(int x, int y)
 {
-	return GetYFromHexCoordinatesDefault(x, y);
+	var map_x = GetXFromHexCoordinatesDefault(x, y);
+	var map_y = GetYFromHexCoordinatesDefault(x, y);
+	return Vector->Rotate([map_x, map_y], draw.rotation, draw.rot_prec)[1];
 }
 
 
@@ -241,7 +252,9 @@ func GetYFromHexCoordinates(int x, int y)
  */
 func GetXFromNodeCoordinates(int x, int y)
 {
-	return GetXFromNodeCoordinatesDefault(x, y);
+	var map_x = GetXFromNodeCoordinatesDefault(x, y);
+	var map_y = GetYFromNodeCoordinatesDefault(x, y);
+	return Vector->Rotate([map_x, map_y], draw.rotation, draw.rot_prec)[0];
 }
 
 
@@ -253,7 +266,48 @@ func GetXFromNodeCoordinates(int x, int y)
  
  @return int The y component in global coordinates.
  */
-global func GetYFromNodeCoordinates(int x, int y)
+func GetYFromNodeCoordinates(int x, int y)
 {
-	return GetYFromNodeCoordinatesDefault(x, y);
+	var map_x = GetXFromNodeCoordinatesDefault(x, y);
+	var map_y = GetYFromNodeCoordinatesDefault(x, y);
+	return Vector->Rotate([map_x, map_y], draw.rotation, draw.rot_prec)[1];
+}
+
+
+/**
+ Gets the angle by which the map is rotated.
+ 
+ @return int The angle, with precision {@link GameMap#GetDrawRotationPrecision}.
+ */
+func GetDrawRotation()
+{
+	return this.draw.rotation;
+}
+
+
+/**
+ Gets the precision of the rotation angle.
+ 
+ @return int The precision.
+ */
+func GetDrawRotationPrecision()
+{
+	return this.draw.rot_prec;
+}
+
+
+func SetRotation(int angle, int precision)
+{
+	angle = angle ?? GetDrawRotation();
+	precision = precision ?? GetDrawRotationPrecision();
+	
+	var should_redraw = (angle != GetDrawRotation()) || (precision != GetDrawRotationPrecision());
+	
+	this.draw.rotation = angle;
+	this.draw.rot_prec = precision;
+	
+	if (should_redraw)
+	{
+		DrawElements();
+	}
 }

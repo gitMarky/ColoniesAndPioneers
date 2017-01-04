@@ -19,6 +19,8 @@ func InitializePlayer(int player, int x, int y, object base, int team, id extra_
 
 func DefaultScenario()
 {
+	Map()->SetRotation(60);
+
 	// 3 tiles, topmost land row
 	Map()->AddHex( 8,  8)->SetResource(Resource_Grain)->AddNumberChip(4);
 	Map()->AddHex(10, 10)->SetResource(Resource_Wood)->AddNumberChip(6);
