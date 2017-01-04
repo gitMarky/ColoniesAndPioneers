@@ -38,8 +38,8 @@ func GetNodeCoordinates(int index)
 {
 	var node = GetNodesAdjacentToHex(0, 0)[index];
 	
-	var x = GetXFromNodeCoordinates(node.X, node.Y) - GetXFromHexCoordinates(0, 0);
-	var y = GetYFromNodeCoordinates(node.X, node.Y) - GetYFromHexCoordinates(0, 0);
+	var x = GetXFromNodeCoordinatesDefault(node.X, node.Y) - GetXFromHexCoordinatesDefault(0, 0);
+	var y = GetYFromNodeCoordinatesDefault(node.X, node.Y) - GetYFromHexCoordinatesDefault(0, 0);
 	
 	return {X = x, Y = y};
 }

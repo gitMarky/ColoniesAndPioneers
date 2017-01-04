@@ -106,8 +106,8 @@ func DrawHexMap()
 	    // Create hex centers
     	var dummy = CreateObject(Rock);
     	dummy->SetCategory(C4D_StaticBack);
-    	dummy->SetPosition(GetXFromHexCoordinates(hex_x, hex_y),
-    	                   GetYFromHexCoordinates(hex_x, hex_y));
+    	dummy->SetPosition(Map()->GetXFromHexCoordinates(hex_x, hex_y),
+    	                   Map()->GetYFromHexCoordinates(hex_x, hex_y));
     	dummy->Message("@(%d/%d)", hex_x, hex_y);
     }
 
@@ -121,8 +121,8 @@ func DrawHexMap()
 
     	var edge = CreateObject(Loam);
     	edge->SetCategory(C4D_StaticBack);
-    	edge->SetPosition(GetXFromHexCoordinates(x, y),
-    	                  GetYFromHexCoordinates(x, y));
+    	edge->SetPosition(Map()->GetXFromHexCoordinates(x, y),
+    	                  Map()->GetYFromHexCoordinates(x, y));
     	//edge->Message("@(%d/%d)", x, y);
     }
     	
@@ -135,8 +135,8 @@ func DrawHexMap()
     	}
 
     	var node = CreateObject(Ore);
-    	var x2 = GetXFromNodeCoordinates(x, y);
-    	var y2 = GetYFromNodeCoordinates(x, y);
+    	var x2 = Map()->GetXFromNodeCoordinates(x, y);
+    	var y2 = Map()->GetYFromNodeCoordinates(x, y);
     	node->SetCategory(C4D_StaticBack);
     	node->SetPosition(x2,
     	                  y2);

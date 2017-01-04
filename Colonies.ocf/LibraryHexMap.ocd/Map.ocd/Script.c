@@ -201,3 +201,59 @@ func DrawElements()
 		hex->DrawElement();
 	}
 }
+
+
+/**
+ Converts hex coordinates to a global x coordinate.
+ 
+ @par x The x component in hex coordinates.
+ @par y The y component in hex coordinates.
+ 
+ @return int The x component in global coordinates.
+ */
+func GetXFromHexCoordinates(int x, int y)
+{
+	return GetXFromHexCoordinatesDefault(x, y);
+}
+
+
+/**
+ Converts hex coordinates to a global y coordinate.
+ 
+ @par x The x component in hex coordinates.
+ @par y The y component in hex coordinates.
+ 
+ @return int The y component in global coordinates.
+ */
+func GetYFromHexCoordinates(int x, int y)
+{
+	return GetYFromHexCoordinatesDefault(x, y);
+}
+
+
+/**
+ Converts node coordinates to a global x coordinate.
+ 
+ @par x The x component in node coordinates.
+ @par y The y component in node coordinates.
+ 
+ @return int The x component in global coordinates.
+ */
+func GetXFromNodeCoordinates(int x, int y)
+{
+	return GetXFromNodeCoordinatesDefault(x, y);
+}
+
+
+/**
+ Converts node coordinates to a global y coordinate.
+ 
+ @par x The x component in node coordinates.
+ @par y The y component in node coordinates.
+ 
+ @return int The y component in global coordinates.
+ */
+global func GetYFromNodeCoordinates(int x, int y)
+{
+	return GetYFromNodeCoordinatesDefault(x, y);
+}

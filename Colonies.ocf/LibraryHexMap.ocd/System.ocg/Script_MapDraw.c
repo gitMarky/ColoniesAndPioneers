@@ -1,5 +1,7 @@
 /**
- Functions for drawing the hex map in a OC scenario.
+ Functions for drawing the hex map in an OC scenario.
+ 
+ The coordinate functions are defined here, but the actual functions are defined in the map.
 
  @author Marky
  */
@@ -47,7 +49,7 @@ global func GetYOffsetMap()
  
  @return int The x component in global coordinates.
  */
-global func GetXFromHexCoordinates(int x, int y)
+global func GetXFromHexCoordinatesDefault(int x, int y)
 {
 	return Sin(HEX_MAP_ALPHA, HexMap_HexHeight()) * (y + x);
 }
@@ -61,7 +63,7 @@ global func GetXFromHexCoordinates(int x, int y)
  
  @return int The y component in global coordinates.
  */
-global func GetYFromHexCoordinates(int x, int y)
+global func GetYFromHexCoordinatesDefault(int x, int y)
 {
 	return Cos(HEX_MAP_ALPHA, HexMap_HexHeight()) * (y - x);
 }
@@ -70,30 +72,30 @@ global func GetYFromHexCoordinates(int x, int y)
 /**
  Converts node coordinates to a global x coordinate.
  
- @par x The x component in hex coordinates.
- @par y The y component in hex coordinates.
+ @par x The x component in node coordinates.
+ @par y The y component in node coordinates.
  
  @return int The x component in global coordinates.
  */
-global func GetXFromNodeCoordinates(int x, int y)
+global func GetXFromNodeCoordinatesDefault(int x, int y)
 {
 	var mod = GetNodeCoordinateModifiers(x, y);
-	return GetXFromHexCoordinates(mod.X, mod.Y);
+	return GetXFromHexCoordinatesDefault(mod.X, mod.Y);
 }
 
 
 /**
  Converts node coordinates to a global y coordinate.
  
- @par x The x component in hex coordinates.
- @par y The y component in hex coordinates.
+ @par x The x component in node coordinates.
+ @par y The y component in node coordinates.
  
  @return int The y component in global coordinates.
  */
-global func GetYFromNodeCoordinates(int x, int y)
+global func GetYFromNodeCoordinatesDefault(int x, int y)
 {
 	var mod = GetNodeCoordinateModifiers(x, y);
-	return GetYFromHexCoordinates(mod.X, mod.Y) + mod.Sign * HexMap_HexRadius();
+	return GetYFromHexCoordinatesDefault(mod.X, mod.Y) + mod.Sign * HexMap_HexRadius();
 }
 
 
