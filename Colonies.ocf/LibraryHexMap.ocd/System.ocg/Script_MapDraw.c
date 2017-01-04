@@ -78,7 +78,7 @@ global func GetYFromHexCoordinates(int x, int y)
 global func GetXFromNodeCoordinates(int x, int y)
 {
 	var mod = GetNodeCoordinateModifiers(x, y);
-	return GetXFromHexCoordinates(mod.x, mod.y);
+	return GetXFromHexCoordinates(mod.X, mod.Y);
 }
 
 
@@ -93,7 +93,7 @@ global func GetXFromNodeCoordinates(int x, int y)
 global func GetYFromNodeCoordinates(int x, int y)
 {
 	var mod = GetNodeCoordinateModifiers(x, y);
-	return GetYFromHexCoordinates(mod.x, mod.y) + mod.sign * HexMap_HexRadius();
+	return GetYFromHexCoordinates(mod.X, mod.Y) + mod.Sign * HexMap_HexRadius();
 }
 
 
@@ -105,9 +105,9 @@ global func GetYFromNodeCoordinates(int x, int y)
  @par y The y component in hex coordinates.
  
  @return proplist A data structure with the entries:
-         x - the hex x coordinates.
-         y - the hex y coordinates.
-         sign - this is a modifier that can be used for calculations.
+         X - the hex x coordinates.
+         Y - the hex y coordinates.
+         Sign - this is a modifier that can be used for calculations.
                 Its main use is determining whether to add or subtract
                 the radius of a hex to the y component.
  */
@@ -136,5 +136,5 @@ global func GetNodeCoordinateModifiers(int x, int y)
 		FatalError(Format("Invalid node coordinates: %d, %d - the coordinate pair must be even/odd, or odd/even, but it is even/even or odd/odd", x, y));
 	}
 	
-	return { x = x + x_mod, y = y + y_mod, sign = sign};
+	return { X = x + x_mod, Y = y + y_mod, Sign = sign};
 }
