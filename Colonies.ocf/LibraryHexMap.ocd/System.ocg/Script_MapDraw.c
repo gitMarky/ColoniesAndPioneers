@@ -49,7 +49,7 @@ global func GetYOffsetMap()
  */
 global func GetXFromHexCoordinates(int x, int y)
 {
-	return Sin(HEX_MAP_ALPHA, HexMap_HexHeight()) * (y + x) + GetXOffsetMap();
+	return Sin(HEX_MAP_ALPHA, HexMap_HexHeight()) * (y + x);
 }
 
 
@@ -63,7 +63,7 @@ global func GetXFromHexCoordinates(int x, int y)
  */
 global func GetYFromHexCoordinates(int x, int y)
 {
-	return Cos(HEX_MAP_ALPHA, HexMap_HexHeight()) * (y - x) + GetYOffsetMap();
+	return Cos(HEX_MAP_ALPHA, HexMap_HexHeight()) * (y - x);
 }
 
 
