@@ -2,6 +2,8 @@
   Representation of the map.
 */
 
+static const MAP_INDEX_OFFSET = 1;
+
 local hexes; // vector that contains the hexes, each hex is a an object of type GameMap_Hex
 local edges; // vector that contains the edges, each edge is a proplist
 local nodes; // vector that contains the nodes, each node is a proplist
@@ -27,8 +29,7 @@ func Initialize()
 func GetHex(int x, int y)
 {
 	EnsureCoordinates(x, y, hexes);	
-
-	return hexes[x][y];
+	return GetCoordinates(x, y, hexes);
 }
 
 
@@ -57,7 +58,7 @@ func AddHex(int x, int y)
 
 	if (!GetHex(x, y))
 	{
-		hexes[x][y] = CreateHex(x, y);
+		SetCoordinates(x, y, hexes, CreateHex(x, y));
 	}
 
 	return GetHex(x, y);
@@ -77,8 +78,7 @@ func AddHex(int x, int y)
 func GetEdge(int x, int y)
 {
 	EnsureCoordinates(x, y, edges);	
-	
-	return edges[x][y];
+	return GetCoordinates(x, y, edges);
 }
 
 
@@ -96,7 +96,7 @@ func AddEdge(int x, int y)
 
 	if (!GetEdge(x, y))
 	{
-		edges[x][y] = CreateEdge(x, y);
+		SetCoordinates(x, y, edges, CreateEdge(x, y));
 	}
 	
 	return GetEdge(x, y);
@@ -116,8 +116,7 @@ func AddEdge(int x, int y)
 func GetNode(int x, int y)
 {
 	EnsureCoordinates(x, y, nodes);	
-
-	return nodes[x][y];
+	return GetCoordinates(x, y, nodes);
 }
 
 
@@ -135,7 +134,7 @@ func AddNode(int x, int y)
 	
 	if (!GetNode(x, y))
 	{
-		nodes[x][y] = CreateNode(x, y);
+		SetCoordinates(x, y, nodes, CreateNode(x, y));
 	}
 	
 	return GetNode(x, y);
@@ -168,10 +167,30 @@ global func Map()
  */
 func EnsureCoordinates(int x, int y, array list)
 {
-	if ((GetType(list) == C4V_Array) && (GetType(list[x]) != C4V_Array))
+	if ((GetType(list) == C4V_Array) && (GetType(list[x + MAP_INDEX_OFFSET]) != C4V_Array))
 	{
-		list[x] = [];
+		list[x + MAP_INDEX_OFFSET] = [];
 	}
+}
+
+
+/**
+ Ensures that the coordinates in a vector array can be filled, without
+ causing script errors.
+ */
+func GetCoordinates(int x, int y, array list)
+{
+	return list[x + MAP_INDEX_OFFSET][y + MAP_INDEX_OFFSET];
+}
+
+
+/**
+ Ensures that the coordinates in a vector array can be filled, without
+ causing script errors.
+ */
+func SetCoordinates(int x, int y, array list, value)
+{
+	list[x + MAP_INDEX_OFFSET][y + MAP_INDEX_OFFSET] = value;
 }
 
 
