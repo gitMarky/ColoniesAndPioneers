@@ -39,7 +39,7 @@ func GetHex(int x, int y)
  */
 func GetHexes()
 {
-	return FindObjects(Find_ID(GameMap_Hex));
+	return FindObjects(Find_ID(GameMap_HexID()));
 }
 
 

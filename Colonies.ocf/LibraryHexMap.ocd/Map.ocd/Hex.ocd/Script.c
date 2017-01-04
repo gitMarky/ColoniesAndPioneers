@@ -17,9 +17,20 @@
  */
 global func CreateHex(int x, int y)
 {
-	var hex = CreateObject(GameMap_Hex, 0, 0, NO_OWNER);
+	var hex = CreateObject(GameMap_HexID(), 0, 0, NO_OWNER);
 	hex.X = x;
 	hex.Y = y;
 	return hex;
+}
+
+
+/**
+ The ID for the game hexes. Overload this f you want to create different tiles.
+ 
+ @return id The ID for the game hexes.
+ */
+global func GameMap_HexID()
+{
+	return GameMap_Hex;
 }
 

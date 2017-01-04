@@ -2,8 +2,9 @@
  Expansion of the hex data object.
  */
 
+#include GameMap_Hex
 #include Plugin_Element_GraphicsObject
-#appendto GameMap_Hex
+
 
 /** The number chip that was added on top of a hex. */
 local number_chip;
@@ -13,6 +14,17 @@ local resource;
 
 /** Does the tile allow resource trade? */
 local allow_trade;
+
+
+/**
+ The ID for the game hexes. Overload this f you want to create different tiles.
+ 
+ @return id The ID for the game hexes.
+ */
+global func GameMap_HexID()
+{
+	return GameMap_HexExtended;
+}
 
 
 /**
@@ -116,3 +128,4 @@ func DrawElement()
 
 	GetGraphicsObject()->DrawLayer(graphics_name);
 }
+
