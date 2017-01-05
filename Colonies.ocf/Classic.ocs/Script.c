@@ -45,7 +45,7 @@ func DefaultScenario()
 	Map()->AddHex( 0,  6);
 	Map()->AddHex( 2,  6)->SetResource(Resource_Wool)->AddNumberChip(9);
 	Map()->AddHex( 4,  6)->SetResource(Resource_Brick)->AddNumberChip(8);
-	Map()->AddHex( 6,  6)->AddNumberChip(nil); // Desert
+	Map()->AddHex( 6,  6)->SetBaseGraphics("Land")->SetTopGraphics("Desert"); // Desert
 	Map()->AddHex( 8,  6)->SetResource(Resource_Ore)->AddNumberChip(8);
 	Map()->AddHex(10,  6)->SetResource(Resource_Wool)->AddNumberChip(10);
 	Map()->AddHex(12,  6)->AllowTrade(true)->SetResource(nil); // Any, 3:1 

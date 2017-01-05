@@ -15,6 +15,12 @@ local resource;
 /** Does the tile allow resource trade? */
 local allow_trade;
 
+/** Custom graphics base name. */
+local graphics_base;
+
+/** Custom graphics top name. */
+local graphics_top;
+
 
 /**
  The ID for the game hexes. Overload this f you want to create different tiles.
@@ -110,22 +116,66 @@ func CanTrade()
 
 
 /**
+ Sets the base graphics of this hex.
+ 
+ @par name The graphics name.
+
+ @return object The hex itself, so that further functions can be called on it.
+ */
+func SetBaseGraphics(string name)
+{
+	graphics_base = name;
+	return this;
+}
+
+
+/**
+ Sets the top graphics of this hex.
+ 
+ @par name The graphics name.
+
+ @return object The hex itself, so that further functions can be called on it.
+ */
+func SetTopGraphics(string name)
+{
+	graphics_top = name;
+	return this;
+}
+
+
+/**
  Decides how to draw the hex. Overload this function if you want to draw it differently.
  */
 func DrawElement()
 {
 	_inherited(...);
 
-	var graphics_name;
+	
 	if (GetResource() && GetNumberChip())
 	{
-		graphics_name = "Land";
+		graphics_base = graphics_base ?? "Land";
+		
+		graphics_top = graphics_top ?? GetResourceGraphics();
 	}
 	else
 	{
- 		graphics_name = "Sea";
+ 		graphics_base = graphics_base ?? "Sea";
 	}
 
-	GetGraphicsObject()->DrawLayer(graphics_name);
+	GetGraphicsObject()->DrawLayer(graphics_base, Graphics_MapTile, 1);
+	GetGraphicsObject()->DrawLayer(graphics_top, Graphics_MapTile, 2);
 }
 
+
+func GetResourceGraphics()
+{
+	var res = GetResource();
+
+	if (res == Resource_Brick) return "Loam";
+	if (res == Resource_Grain) return "Field";
+	if (res == Resource_Ore) return "Mountain";
+	if (res == Resource_Wood) return "Forest";
+	if (res == Resource_Wool) return "Pasture";
+
+	return nil;
+}
