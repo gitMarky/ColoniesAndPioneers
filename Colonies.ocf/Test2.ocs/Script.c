@@ -94,6 +94,11 @@ func DrawHexMap()
 	Map()->DrawElements();
 
 	//return;
+	
+	for (var node in FindObjects(Find_Or(Find_ID(Rock), Find_ID(Loam), Find_ID(Ore))))
+	{
+		if (node) node->RemoveObject();
+	}
 
 	for (var hex_x = 0; hex_x < 20; hex_x += 2)
     for (var hex_y = 0; hex_y < 20; hex_y += 2)
@@ -140,6 +145,13 @@ func DrawHexMap()
     	node->SetCategory(C4D_StaticBack);
     	node->SetPosition(x2,
     	                  y2);
-    	//node->Message("@(%d/%d) (%d/%d)", x, y, x2, y2);
+    	node->Message("@(%d/%d) (%d/%d)", x, y, x2, y2);
     }
+}
+
+
+func OrientHexMap(int orientation)
+{
+	Map()->SetCoordinateOrientation(orientation);
+	DrawHexMap();
 }

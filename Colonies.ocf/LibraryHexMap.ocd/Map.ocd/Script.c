@@ -8,11 +8,17 @@ local hexes; // vector that contains the hexes, each hex is a an object of type 
 local edges; // vector that contains the edges, each edge is a proplist
 local nodes; // vector that contains the nodes, each node is a proplist
 
+local coordinates; // proplist, defines the coordinate system layout.
+
 func Initialize()
 {
 	hexes = [];
 	edges = [];
 	nodes = [];
+
+	coordinates = {
+		orientation = MAP_HEX_NORTH_EAST,
+	};
 }
 
 
@@ -213,7 +219,7 @@ func DrawElements()
  */
 func GetXFromHexCoordinates(int x, int y)
 {
-	return GetXFromHexCoordinatesDefault(x, y);
+	return GetXFromHexCoordinatesDefault(x, y, GetCoordinateOrientation() * HEX_MAP_ORIENTATION_STEP);
 }
 
 
@@ -227,7 +233,7 @@ func GetXFromHexCoordinates(int x, int y)
  */
 func GetYFromHexCoordinates(int x, int y)
 {
-	return GetYFromHexCoordinatesDefault(x, y);
+	return GetYFromHexCoordinatesDefault(x, y, GetCoordinateOrientation() * HEX_MAP_ORIENTATION_STEP);
 }
 
 
@@ -241,7 +247,7 @@ func GetYFromHexCoordinates(int x, int y)
  */
 func GetXFromNodeCoordinates(int x, int y)
 {
-	return GetXFromNodeCoordinatesDefault(x, y);
+	return GetXFromNodeCoordinatesDefault(x, y, GetCoordinateOrientation() * HEX_MAP_ORIENTATION_STEP, GetCoordinateOrientation());
 }
 
 
@@ -253,7 +259,29 @@ func GetXFromNodeCoordinates(int x, int y)
  
  @return int The y component in global coordinates.
  */
-global func GetYFromNodeCoordinates(int x, int y)
+func GetYFromNodeCoordinates(int x, int y)
 {
-	return GetYFromNodeCoordinatesDefault(x, y);
+	return GetYFromNodeCoordinatesDefault(x, y, GetCoordinateOrientation() * HEX_MAP_ORIENTATION_STEP, GetCoordinateOrientation());
+}
+
+
+/**
+ Get the orientation of the x-axis of the hex coordinate system.
+ 
+ @return int An integer from the constants {@c MAP_HEX_*}.
+ */
+func GetCoordinateOrientation()
+{
+	return this.coordinates.orientation;
+}
+
+
+/**
+ Get the orientation of the x-axis of the hex coordinate system.
+ 
+ @par orientation An integer from the constants {@c MAP_HEX_*}.
+ */
+func SetCoordinateOrientation(int orientation)
+{
+	this.coordinates.orientation = orientation % 6;
 }
