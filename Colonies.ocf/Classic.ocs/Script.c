@@ -97,7 +97,7 @@ func DrawHexMap()
 
 	Map()->DrawElements();
 
-	//return;
+	return;
 	
 	for (var node in FindObjects(Find_Or(Find_ID(Rock), Find_ID(Loam), Find_ID(Ore))))
 	{
