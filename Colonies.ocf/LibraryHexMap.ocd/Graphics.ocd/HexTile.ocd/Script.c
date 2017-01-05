@@ -25,7 +25,7 @@ func GetNodeFactor(int index, int precision)
 	var nodes = [[0, -50], [42, -24], [252, 24], [0, 50], [-42, 24], [-42, -24]];
 	var hex_node = GetNodeCoordinates(index);
 	var node = nodes[index];
-	
+
 	var node_offset = {X = 50, Y = 0};
 	var hex_offset = {X = HexMap_HexRadius() - 1, Y = 0};
 	
@@ -36,10 +36,12 @@ func GetNodeFactor(int index, int precision)
 
 func GetNodeCoordinates(int index)
 {
-	var node = GetNodesAdjacentToHex(0, 0)[index];
-	
-	var x = GetXFromNodeCoordinatesDefault(node.X, node.Y) - GetXFromHexCoordinatesDefault(0, 0);
-	var y = GetYFromNodeCoordinatesDefault(node.X, node.Y) - GetYFromHexCoordinatesDefault(0, 0);
+	index += 6;
+	index -= Map()->GetCoordinateOrientation();
+	var node = GetNodesAdjacentToHex(0, 0)[index % 6];
+
+	var x = Map()->GetXFromNodeCoordinates(node.X, node.Y) - Map()->GetXFromHexCoordinates(0, 0);
+	var y = Map()->GetYFromNodeCoordinates(node.X, node.Y) - Map()->GetYFromHexCoordinates(0, 0);
 	
 	return {X = x, Y = y};
 }
