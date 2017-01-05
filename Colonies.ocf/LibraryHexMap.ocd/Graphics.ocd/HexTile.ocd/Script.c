@@ -82,11 +82,20 @@ func GetNodeCoordinates(int index)
  @par graphics_name The graphics name.
  @par graphcis_definition The definition to take the graphics from.
  @par layer The overlay id. Defaults to 1.
+ @par scale_width Scale in precision 1000. Defaults to 1000.
+ @par scale_height Scale in precision 1000. Defaults to 1000.
+ @par offset_x Offset in x direction in precision 1000. Defaults to 0.
+ @par offset_y Offset in y direction in precision 1000. Defaults to 0.
  */
-func DrawLayer(string graphics_name, id graphics_definition, int layer)
+func DrawLayer(string graphics_name, id graphics_definition, int layer, int scale_width, int scale_height, int offset_x, int offset_y)
 {
+	var precision = 1000;
 	layer = layer ?? 1;
+	scale_width = scale_width ?? precision;
+	scale_height = scale_height ?? precision;
+	offset_x = offset_x ?? 0;
+	offset_y = offset_y ?? 0;
 
 	SetGraphics(graphics_name, graphics_definition ?? GetID(), layer, GFXOV_MODE_Base);
-	SetObjDrawTransform(this->GetTileWidth(), 0, 0, 0, this->GetTileHeight(), 0, layer);
+	SetObjDrawTransform(scale_width * this->GetTileWidth() / precision, 0, offset_x, 0, scale_height * this->GetTileHeight() / precision, offset_y, layer);
 }

@@ -164,6 +164,26 @@ func DrawElement()
 
 	GetGraphicsObject()->DrawLayer(graphics_base, Graphics_MapTile, 1);
 	GetGraphicsObject()->DrawLayer(graphics_top, Graphics_MapTile, 2);
+	
+	var number = GetNumberChip();
+	if (number)
+	{
+		GetGraphicsObject()->DrawLayer(nil, Graphics_NumberChip, 3);
+		
+		var number_x = (number / 10) % 10;
+		var number_i = number % 10;
+		var color = GetNumberColor(number);
+
+		if (number_x > 0)
+		{
+			DrawNumber(number_x, 4, color, -2000);
+			DrawNumber(number_i, 5, color, +2000);
+		}
+		else
+		{
+			DrawNumber(number_i, 5, color);
+		}
+	}
 }
 
 
@@ -178,4 +198,28 @@ func GetResourceGraphics()
 	if (res == Resource_Wool) return "Pasture";
 
 	return nil;
+}
+
+
+func GetNumberColor(int number)
+{
+	if (number >= 6 && number <= 8) // include the 7, too, even though this will not be present in most maps
+	{
+		return RGB(200, 0, 0);
+	}
+	else
+	{
+		return RGB(40, 40, 40);
+	}
+}
+
+
+func DrawNumber(int number, int layer, int color, int x_adjust)
+{
+	var number_scale = 200;
+	var offset_x = -1000;
+	var offset_y = -1000;
+
+	GetGraphicsObject()->DrawLayer(Format("%d", number), Icon_SlimNumber, layer, number_scale, number_scale, offset_x + x_adjust, offset_y);
+	GetGraphicsObject()->SetClrModulation(color, layer);
 }

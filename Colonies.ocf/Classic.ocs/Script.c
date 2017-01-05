@@ -101,21 +101,21 @@ func DrawHexMap()
 		if (node) node->RemoveObject();
 	}
 
-	for (var hex_x = 0; hex_x < 20; hex_x += 2)
-    for (var hex_y = 0; hex_y < 20; hex_y += 2)
-    {
-    	if (Map()->GetHex(hex_x, hex_y) == nil)
-    	{
-    		continue;
-    	}
-    
-	    // Create hex centers
-    	var dummy = CreateObject(Rock);
-    	dummy->SetCategory(C4D_StaticBack);
-    	dummy->SetPosition(Map()->GetXFromHexCoordinates(hex_x, hex_y),
-    	                   Map()->GetYFromHexCoordinates(hex_x, hex_y));
-    	//dummy->Message("@(%d/%d)", hex_x, hex_y);
-    }
+//	for (var hex_x = 0; hex_x < 20; hex_x += 2)
+//    for (var hex_y = 0; hex_y < 20; hex_y += 2)
+//    {
+//    	if (Map()->GetHex(hex_x, hex_y) == nil)
+//    	{
+//    		continue;
+//    	}
+//    
+//	    // Create hex centers
+//    	var dummy = CreateObject(Rock);
+//    	dummy->SetCategory(C4D_StaticBack);
+//    	dummy->SetPosition(Map()->GetXFromHexCoordinates(hex_x, hex_y),
+//    	                   Map()->GetYFromHexCoordinates(hex_x, hex_y));
+//    	//dummy->Message("@(%d/%d)", hex_x, hex_y);
+//    }
 
 	for (var x = 0; x < 21; x += 1)
     for (var y = 0; y < 21; y += 1)
