@@ -30,6 +30,8 @@ func Initialize()
 		max_y = 0,	// max y coordinate of a hex component on screen, in pixels
 		min_x = 0,	// min x coordinate of a hex component on screen, in pixels
 		min_y = 0,	// min y coordinate of a hex component on screen, in pixels
+		pos_x = 0,	// map position in x on screen, in pixels
+		pos_y = 0,  // map position in y on screen, in pixels
 	};
 }
 
@@ -226,12 +228,15 @@ func DrawElements()
  
  @par x The x component in hex coordinates.
  @par y The y component in hex coordinates.
+ @par ignore_translation Ignores any offsets that are added by the map.
  
  @return int The x component in global coordinates.
  */
-func GetXFromHexCoordinates(int x, int y)
+func GetXFromHexCoordinates(int x, int y, bool ignore_translation)
 {
-	return GetXFromHexCoordinatesDefault(x, y, GetCoordinateOrientation() * HEX_MAP_ORIENTATION_STEP);
+	var screen_x = GetXFromHexCoordinatesDefault(x, y, GetCoordinateOrientation() * HEX_MAP_ORIENTATION_STEP);
+	if (!ignore_translation) screen_x += this.dimensions.pos_x;
+	return screen_x;
 }
 
 
@@ -240,12 +245,15 @@ func GetXFromHexCoordinates(int x, int y)
  
  @par x The x component in hex coordinates.
  @par y The y component in hex coordinates.
+ @par ignore_translation Ignores any offsets that are added by the map.
  
  @return int The y component in global coordinates.
  */
-func GetYFromHexCoordinates(int x, int y)
+func GetYFromHexCoordinates(int x, int y, bool ignore_translation)
 {
-	return GetYFromHexCoordinatesDefault(x, y, GetCoordinateOrientation() * HEX_MAP_ORIENTATION_STEP);
+	var screen_y = GetYFromHexCoordinatesDefault(x, y, GetCoordinateOrientation() * HEX_MAP_ORIENTATION_STEP);
+	if (!ignore_translation) screen_y += this.dimensions.pos_y;
+	return screen_y;
 }
 
 
@@ -254,12 +262,15 @@ func GetYFromHexCoordinates(int x, int y)
  
  @par x The x component in node coordinates.
  @par y The y component in node coordinates.
+ @par ignore_translation Ignores any offsets that are added by the map.
  
  @return int The x component in global coordinates.
  */
-func GetXFromNodeCoordinates(int x, int y)
+func GetXFromNodeCoordinates(int x, int y, bool ignore_translation)
 {
-	return GetXFromNodeCoordinatesDefault(x, y, GetCoordinateOrientation() * HEX_MAP_ORIENTATION_STEP, GetCoordinateOrientation());
+	var screen_x = GetXFromNodeCoordinatesDefault(x, y, GetCoordinateOrientation() * HEX_MAP_ORIENTATION_STEP, GetCoordinateOrientation());
+	if (!ignore_translation) screen_x += this.dimensions.pos_x;
+	return screen_x;
 }
 
 
@@ -268,12 +279,15 @@ func GetXFromNodeCoordinates(int x, int y)
  
  @par x The x component in node coordinates.
  @par y The y component in node coordinates.
+ @par ignore_translation Ignores any offsets that are added by the map.
  
  @return int The y component in global coordinates.
  */
-func GetYFromNodeCoordinates(int x, int y)
+func GetYFromNodeCoordinates(int x, int y, bool ignore_translation)
 {
-	return GetYFromNodeCoordinatesDefault(x, y, GetCoordinateOrientation() * HEX_MAP_ORIENTATION_STEP, GetCoordinateOrientation());
+	var screen_y = GetYFromNodeCoordinatesDefault(x, y, GetCoordinateOrientation() * HEX_MAP_ORIENTATION_STEP, GetCoordinateOrientation());
+	if (!ignore_translation) screen_y += this.dimensions.pos_y;
+	return screen_y;
 }
 
 
@@ -319,7 +333,7 @@ func SetNumberOfHexesX(int amount)
 {
 	if (amount < 0)
 	{
-		FatalError("Needs non-negative amount, got %d", amount);
+		FatalError(Format("Needs non-negative amount, got %d", amount));
 	}
 	
 	this.coordinates.max_x = amount;
@@ -347,7 +361,7 @@ func SetNumberOfHexesY(int amount)
 {
 	if (amount < 0)
 	{
-		FatalError("Needs non-negative amount, got %d", amount);
+		FatalError(Format("Needs non-negative amount, got %d", amount));
 	}
 	
 	this.coordinates.max_y = amount;
@@ -461,4 +475,31 @@ func GetDimensions()
 	                 this.dimensions.min_y,
 	                 this.dimensions.max_x - this.dimensions.min_x,
 	                 this.dimensions.max_y - this.dimensions.min_y);
+}
+
+
+/**
+ Sets the map onscreen position.
+ 
+ @par x The x component in pixels on screen.
+ @par y The y component in pixels on screen.
+ */
+func SetMapPosition(int x, int y)
+{
+	this.dimensions.pos_x = x - this.dimensions.min_x;
+	this.dimensions.pos_y = y - this.dimensions.min_y;
+}
+
+
+/**
+ Gets the map onscreen position.
+ 
+ @return proplist A proplist with the components
+         X The x component in pixels on screen.
+         Y The y component in pixels on screen.
+ */
+func GetMapPosition(int x, int y)
+{
+	return {X = this.dimensions.pos_x + this.dimensions.min_x,
+	        Y = this.dimensions.pos_y + this.dimensions.min_y};
 }
