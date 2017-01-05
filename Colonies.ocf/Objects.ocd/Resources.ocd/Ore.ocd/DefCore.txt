@@ -3,3 +3,5 @@ id=Resource_Ore
 Version=8,0
 Category=C4D_StaticBack
 HideInCreator=true
+Width=256
+Height=256
