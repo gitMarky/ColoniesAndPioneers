@@ -26,14 +26,14 @@ func Construction()
 		Right = "100%",
 		Top = "0%",
 		Bottom = ToEmString(GUI_Controller_Resource_IconSize + GUI_Controller_Resource_IconMargin * 2),
-		Priority = 1,
+		Priority = -1,
 		BackgroundColor = RGBa(1, 1, 1, 128),
 	};
 	
 	for (var i = 0; i < GetLength(GetResourceList()); ++i)
 	{
 		var resource = GetResourceList()[i];
-		gui_menu_resources[Format("%i", resource)] = AssembleResourceIcon(resource, i);
+		gui_menu_resources[GetResourceProperty(resource)] = AssembleResourceIcon(resource, i);
 	}
 
 	gui_id_resources = GuiOpen(gui_menu_resources);
@@ -65,7 +65,7 @@ func AssembleResourceIcon(id resource, int slot)
 		Top = ToEmString(top),
 		Bottom = ToEmString(bottom),
 		Style = GUI_TextBottom | GUI_TextRight,
-		Text = "0x",
+		Text = GetResourceAmountText(0),
 	};
 }
 
@@ -75,5 +75,32 @@ func GetResourceList()
 	return [Resource_Wood, Resource_Brick, Resource_Grain, Resource_Wool, Resource_Ore];
 }
 
+
+func GetResourceProperty(id resource)
+{
+	return Format("%i", resource);
+}
+
+
+func GetResourceAmountText(int amount)
+{
+	return Format("%dx", amount);
+}
+
+
 /* Callbacks */
+
+func OnBaseMaterialChange(id material, int change)
+{
+	if (IsValueInArray(GetResourceList(), material))
+	{
+		var amount = GetBaseMaterial(GetOwner(), material);
+		gui_menu_resources[GetResourceProperty(material)].Text = GetResourceAmountText(amount);
+		
+		GuiUpdate(gui_menu_resources, gui_id_resources);
+	}
+	
+	_inherited(material, change, ...);
+}
+
 
