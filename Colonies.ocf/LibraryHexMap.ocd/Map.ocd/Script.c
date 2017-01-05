@@ -228,15 +228,12 @@ func DrawElements()
  
  @par x The x component in hex coordinates.
  @par y The y component in hex coordinates.
- @par ignore_translation Ignores any offsets that are added by the map.
  
  @return int The x component in global coordinates.
  */
-func GetXFromHexCoordinates(int x, int y, bool ignore_translation)
+func GetXFromHexCoordinates(int x, int y)
 {
-	var screen_x = GetXFromHexCoordinatesDefault(x, y, GetCoordinateOrientation() * HEX_MAP_ORIENTATION_STEP);
-	if (!ignore_translation) screen_x += this.dimensions.pos_x;
-	return screen_x;
+	return this.dimensions.pos_x + GetXFromHexCoordinatesDefault(x, y, GetCoordinateOrientation() * HEX_MAP_ORIENTATION_STEP);
 }
 
 
@@ -245,15 +242,12 @@ func GetXFromHexCoordinates(int x, int y, bool ignore_translation)
  
  @par x The x component in hex coordinates.
  @par y The y component in hex coordinates.
- @par ignore_translation Ignores any offsets that are added by the map.
  
  @return int The y component in global coordinates.
  */
-func GetYFromHexCoordinates(int x, int y, bool ignore_translation)
+func GetYFromHexCoordinates(int x, int y)
 {
-	var screen_y = GetYFromHexCoordinatesDefault(x, y, GetCoordinateOrientation() * HEX_MAP_ORIENTATION_STEP);
-	if (!ignore_translation) screen_y += this.dimensions.pos_y;
-	return screen_y;
+	return this.dimensions.pos_y + GetYFromHexCoordinatesDefault(x, y, GetCoordinateOrientation() * HEX_MAP_ORIENTATION_STEP);
 }
 
 
@@ -262,15 +256,12 @@ func GetYFromHexCoordinates(int x, int y, bool ignore_translation)
  
  @par x The x component in node coordinates.
  @par y The y component in node coordinates.
- @par ignore_translation Ignores any offsets that are added by the map.
  
  @return int The x component in global coordinates.
  */
-func GetXFromNodeCoordinates(int x, int y, bool ignore_translation)
+func GetXFromNodeCoordinates(int x, int y)
 {
-	var screen_x = GetXFromNodeCoordinatesDefault(x, y, GetCoordinateOrientation() * HEX_MAP_ORIENTATION_STEP, GetCoordinateOrientation());
-	if (!ignore_translation) screen_x += this.dimensions.pos_x;
-	return screen_x;
+	return this.dimensions.pos_x + GetXFromNodeCoordinatesDefault(x, y, GetCoordinateOrientation() * HEX_MAP_ORIENTATION_STEP, GetCoordinateOrientation());
 }
 
 
@@ -279,15 +270,12 @@ func GetXFromNodeCoordinates(int x, int y, bool ignore_translation)
  
  @par x The x component in node coordinates.
  @par y The y component in node coordinates.
- @par ignore_translation Ignores any offsets that are added by the map.
  
  @return int The y component in global coordinates.
  */
-func GetYFromNodeCoordinates(int x, int y, bool ignore_translation)
+func GetYFromNodeCoordinates(int x, int y)
 {
-	var screen_y = GetYFromNodeCoordinatesDefault(x, y, GetCoordinateOrientation() * HEX_MAP_ORIENTATION_STEP, GetCoordinateOrientation());
-	if (!ignore_translation) screen_y += this.dimensions.pos_y;
-	return screen_y;
+	return this.dimensions.pos_y + GetYFromNodeCoordinatesDefault(x, y, GetCoordinateOrientation() * HEX_MAP_ORIENTATION_STEP, GetCoordinateOrientation());
 }
 
 
