@@ -24,27 +24,16 @@ func Construction()
 		Style = GUI_Multiple,
 		Left = "0%",
 		Right = "100%",
-		Top = "80%",
-		Bottom = "100%",
+		Top = "0%",
+		Bottom = ToEmString(GUI_Controller_Resource_IconSize + GUI_Controller_Resource_IconMargin * 2),
 		Priority = 1,
 		BackgroundColor = RGBa(1, 1, 1, 128),
-		
-		menu_resource_grid = 
-		{
-			Priority = 2,
-			Left = "5%",
-			Right = "95%",
-			Top = "5%",
-			Bottom = "95%",
-			BackgroundColor = RGBa(255, 255, 0, 128),
-		},
 	};
 	
 	for (var i = 0; i < GetLength(GetResourceList()); ++i)
 	{
 		var resource = GetResourceList()[i];
-
-		gui_menu_resources.menu_resource_grid[Format("%i",resource)] = AssembleResourceIcon(resource, i);
+		gui_menu_resources[Format("%i", resource)] = AssembleResourceIcon(resource, i);
 	}
 
 	gui_id_resources = GuiOpen(gui_menu_resources);
