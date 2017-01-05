@@ -8,24 +8,15 @@ local hexes; // vector that contains the hexes, each hex is a an object of type 
 local edges; // vector that contains the edges, each edge is a proplist
 local nodes; // vector that contains the nodes, each node is a proplist
 
-local coordinates; // proplist, defines the coordinate system layout.
-local dimensions; // proplist, defines the screen layout
-
-func Initialize()
-{
-	hexes = [];
-	edges = [];
-	nodes = [];
-
-	coordinates = {
+local coordinates = { // proplist, defines the coordinate system layout.
 		orientation = MAP_HEX_NORTH_EAST,	// orientation of the x-axis
 		max_x = nil,						// max number of hexes in x direction
 		max_y = nil,						// max number of hexes in y direction
 		max_set = false,					// maximum numbers were set?
 		corners = [],						// coordinates of the outmost corners of the map
 	};
-	
-	dimensions = {
+
+local dimensions = { // proplist, defines the screen layout
 		max_x = 0,	// max x coordinate of a hex component on screen, in pixels
 		max_y = 0,	// max y coordinate of a hex component on screen, in pixels
 		min_x = 0,	// min x coordinate of a hex component on screen, in pixels
@@ -33,6 +24,16 @@ func Initialize()
 		pos_x = 0,	// map position in x on screen, in pixels
 		pos_y = 0,  // map position in y on screen, in pixels
 	};
+
+func Initialize()
+{
+	hexes = [];
+	edges = [];
+	nodes = [];
+
+	this.coordinates = new coordinates{};
+	
+	this.dimensions = new dimensions{};
 }
 
 
@@ -373,12 +374,53 @@ func ClearCorners()
  */
 func SetupCornersRectangular()
 {
-	var x = this.coordinates.max_x * 2;
-	var y = this.coordinates.max_y * 2;
+	this.coordinates.corners = GetCornersRectangular(this.coordinates.max_x, this.coordinates.max_y);
+}
+
+/**
+ Gets the corners of a rectangular map with given dimensions.
+ 
+ @par hexes_x The number of hexes in x direction.
+ @par hexes_y The number of hexes in y direction.
+ */
+func GetCornersRectangular(int hexes_x, int hexes_y)
+{
+	var x = hexes_x * 2;
+	var y = hexes_y * 2;
 	this.coordinates.corners = [{X = 0, Y = 0},
 	                            {X = x, Y = 0},
 	                            {X = 0, Y = y},
 	                            {X = x, Y = y}];
+}
+
+
+/**
+ Predefined corner setup for a rectangle hexagon.
+ */
+func SetupCornersHexagonal()
+{
+	this.coordinates.corners = GetCornersHexagonal(this.coordinates.max_x, this.coordinates.max_y);
+}
+
+
+/**
+ Gets the corners of a hexagonal map with given dimensions.
+
+ @par hexes_x The number of hexes in x direction.
+ @par hexes_y The number of hexes in y direction.
+ */
+func GetCornersHexagonal(int hexes_x, int hexes_y)
+{
+	var x = hexes_x;
+	var y = hexes_y;
+	var x2 = hexes_x * 2;
+	var y2 = hexes_y * 2;
+	return [{X =  0, Y =  0},
+	        {X =  x, Y =  0},
+	        {X =  x, Y = y2},
+	        {X =  0, Y =  y},
+	        {X = x2, Y =  y},
+	        {X = x2, Y = y2}];
 }
 
 
@@ -395,39 +437,29 @@ func AddCorner(proplist corner)
 
 
 /**
- Predefined corner setup for a rectangle hexagon.
- */
-func SetupCornersHexagonal()
-{
-	var x = this.coordinates.max_x;
-	var y = this.coordinates.max_y;
-	var x2 = this.coordinates.max_x * 2;
-	var y2 = this.coordinates.max_y * 2;
-	this.coordinates.corners = [{X =  0, Y =  0},
-	                            {X =  x, Y =  0},
-	                            {X =  x, Y = y2},
-	                            {X =  0, Y =  y},
-	                            {X = x2, Y =  y},
-	                            {X = x2, Y = y2}];
-}
-
-
-/**
  Calculates the map dimensions, so that they can be queried
  with {@link GameMap#GetDimensions}.
  
+ @par corners An array of corners. If no parameter is passed this
+              uses the internal corners of the map that were set
+              up by the functions {@link GameMap#SetupCornersHexagonal},
+              {@link GameMap#SetupCornersRectangular}, or
+              {@link GameMap#AddCorner}.
+ 
  @return proplist See {@link GameMap#GetDimensions}.
  */
-func CalculateDimensions()
+func CalculateDimensions(array corners)
 {
-	if (GetLength(this.coordinates.corners) == 0)
+	corners = corners ?? this.coordinates.corners;
+
+	if (GetLength(corners) == 0)
 	{
 		FatalError("The map has no corners. Define corners with SetupCorners*() or AddCorner()");
 	}
 	
 	var max_x = 0, max_y = 0, min_x = 0, min_y = 0;
 	
-	for (var corner in this.coordinates.corners)
+	for (var corner in corners)
 	{
 		var corner_nodes = GetNodesAdjacentToHex(corner.X, corner.Y);
 		
@@ -442,13 +474,20 @@ func CalculateDimensions()
 			if (min_y == 0) min_y = y; else min_y = Min(y, min_y);
 		}
 	}
-	
-	this.dimensions.min_x = min_x;
-	this.dimensions.max_x = max_x;
-	this.dimensions.min_y = min_y;
-	this.dimensions.max_y = max_y;
 
-	return GetDimensions();
+	if (GetType(this) == C4V_C4Object)
+	{
+		this.dimensions.min_x = min_x;
+		this.dimensions.max_x = max_x;
+		this.dimensions.min_y = min_y;
+		this.dimensions.max_y = max_y;
+	
+		return GetDimensions();
+	}
+	else
+	{
+		return Rectangle(min_x, min_y, max_x - min_x, max_y - min_y);
+	}
 }
 
 
