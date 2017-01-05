@@ -6,7 +6,7 @@
 
 
 // selectable by HUD and some performance optimizations for the HUD updates
-//#include Library_HUDAdapter
+#include Library_HUDAdapter
 // standard controls
 //#include Library_ClonkControl
 #include Library_ClonkGamepadControl
