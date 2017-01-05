@@ -1,0 +1,5 @@
+Name=Siegpunkte
+
+#Goal window
+MsgGoalFulfilled=Du hast die erforderlichen Siegpunkte erreicht.
+MsgGoalUnFulfilled=%s.

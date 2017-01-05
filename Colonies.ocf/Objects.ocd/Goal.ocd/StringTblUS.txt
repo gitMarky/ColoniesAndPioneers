@@ -1,0 +1,5 @@
+Name=Victory Points
+
+#Goal window
+MsgGoalFulfilled=You have reached the necessary victory points.
+MsgGoalUnFulfilled=%s.

@@ -17,3 +17,4 @@ Crew=Game_Cursor
 MapWidth=100,0,64,10000
 MapHeight=50,0,40,10000
 MapZoom=1
+

@@ -4,6 +4,9 @@ func Initialize()
 	DefaultScenario();
 	SetupHexMap();
 	DrawHexMap();
+
+	var goal = CreateObject(Goal_VictoryPoints);
+	goal->SetVictoryPointGoal(10);
 }
 
 
