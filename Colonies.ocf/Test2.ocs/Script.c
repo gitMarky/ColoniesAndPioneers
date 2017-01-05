@@ -153,5 +153,11 @@ func DrawHexMap()
 func OrientHexMap(int orientation)
 {
 	Map()->SetCoordinateOrientation(orientation);
+	Map()->SetNumberOfHexesX(12);
+	Map()->SetNumberOfHexesY(12);
+	Map()->SetupCornersHexagonal();
+	var dim = Map()->CalculateDimensions();
 	DrawHexMap();
+	
+	Log("Dimensions: %d/%d, %d/%d", dim.x, dim.y, dim.wdt, dim.hgt);
 }
