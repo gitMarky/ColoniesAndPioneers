@@ -18,6 +18,9 @@ func Initialize()
 
 	coordinates = {
 		orientation = MAP_HEX_NORTH_EAST,
+		max_x = nil,
+		max_y = nil,
+		max_set = false,
 	};
 }
 
@@ -285,3 +288,61 @@ func SetCoordinateOrientation(int orientation)
 {
 	this.coordinates.orientation = orientation % 6;
 }
+
+
+/**
+ Get the number of hexes in the map in X direction.
+ 
+ @return int The map will has this many hexes.
+ */
+func GetNumberOfHexesX()
+{
+	return this.coordinates.max_x;
+}
+
+
+/**
+ Set the number of hexes in the map in X direction.
+ 
+ @par amount The map will have this many hexes.
+ */
+func SetNumberOfHexesX(int amount)
+{
+	if (amount < 0)
+	{
+		FatalError("Needs non-negative amount, got %d", amount);
+	}
+	
+	this.coordinates.max_x = amount;
+	this.coordinates.max_set = this.coordinates.max_x && this.coordinates.max_y;
+}
+
+
+/**
+ Get the number of hexes in the map in Y direction.
+ 
+ @return int The map will has this many hexes.
+ */
+func GetNumberOfHexesY()
+{
+	return this.coordinates.max_y;
+}
+
+
+/**
+ Set the number of hexes in the map in Y direction.
+ 
+ @par amount The map will have this many hexes.
+ */
+func SetNumberOfHexesY(int amount)
+{
+	if (amount < 0)
+	{
+		FatalError("Needs non-negative amount, got %d", amount);
+	}
+	
+	this.coordinates.max_y = amount;
+	this.coordinates.max_set = this.coordinates.max_x && this.coordinates.max_y;
+}
+
+
