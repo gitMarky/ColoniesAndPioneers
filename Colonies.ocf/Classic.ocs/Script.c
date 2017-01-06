@@ -1,12 +1,18 @@
 
 func Initialize()
 {
+	// Map
 	DefaultScenario();
 	SetupHexMap();
 	DrawHexMap();
 
+	// Goal
 	var goal = CreateObject(Goal_VictoryPoints);
 	goal->SetVictoryPointGoal(10);
+	
+	// Game System
+	CreateObject(Environment_RoundManager);
+	CreateObject(Environment_TurnManager);
 }
 
 
