@@ -142,6 +142,17 @@ func GetNode(int x, int y)
 
 
 /**
+ Gets all nodes.
+ 
+ @return array An array of the nodes that exist.
+ */
+func GetNodes()
+{
+	return FindObjects(Find_ID(GameMap_HexNodeID()));
+}
+
+
+/**
  Adds a node in the given coordinates.
 
  @par x The x component in node coordinates.

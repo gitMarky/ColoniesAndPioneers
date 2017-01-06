@@ -155,24 +155,6 @@ global func CreateEdge(int x, int y)
 
 
 /**
- Creates a node with the given coordinates.
- 
- @par x The x component in the node coordinate system.
- @par y The y component in the node coordinate system.
- 
- @return proplist A proplist describing the node.
- */
-global func CreateNode(int x, int y)
-{
-	return {
-		isNode = true,
-		X = x,
-		Y = y,
-	};
-}
-
-
-/**
  Gets a coordinate array in global coordinates.
  
  @par x The global x component in the coordinate system.
