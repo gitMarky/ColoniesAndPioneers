@@ -34,3 +34,27 @@ global func GameMap_HexID()
 	return GameMap_Hex;
 }
 
+
+/**
+ Gets all nodes that are adjacent to this hex.
+ 
+ @return array An array of objects {@link Global#GameMap_HexNodeID}.
+ */
+func GetAdjacentNodes()
+{
+	var nodes = GetNodesAdjacentToHex(this.X, this.Y);
+	
+	var adjacent = [];
+	
+	for (var node in nodes)
+	{
+		var found = Map()->GetNode(node.X, node.Y);
+		if (found)
+		{
+			PushBack(adjacent, found);
+		}
+	}
+	
+	return adjacent;
+}
+

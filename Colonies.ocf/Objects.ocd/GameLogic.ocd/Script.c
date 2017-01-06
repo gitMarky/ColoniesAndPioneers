@@ -15,12 +15,23 @@ func DetermineResources()
 	{
 		var resource = hex->~GetResource();
 		var number = hex->~GetNumberChip();
+		
+		// exclude hexes that were not rolled
 		if (!resource) continue;
-	
-		if (number == result)
+		if (number != result) continue;
+		
+		var nodes = hex->GetAdjacentNodes();
+		
+		for (var node in nodes)
 		{
-			DoBaseMaterial(TurnManager()->GetActivePlayer(), resource, 1);
-			Log("* Got 1 %i from hex number %d", resource, number);
+			var structure = node->GetStructure();
+
+			if (structure)
+			{
+				var production = structure->GetResourceProduction();
+				DoBaseMaterial(TurnManager()->GetActivePlayer(), resource, production);
+				Log("* Resource production of hex %d: %d %i from %s on %d %d", number, production, resource, structure->GetName(), node.X, node.Y);
+			}
 		}
 	}
 }
