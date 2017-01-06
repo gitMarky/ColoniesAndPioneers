@@ -1,0 +1,8 @@
+[DefCore]
+id=Graphics_HexNode
+Version=8,0
+Category=C4D_StaticBack
+Width=21
+Height=21
+Offset=-11,-11
+HideInCreator=true

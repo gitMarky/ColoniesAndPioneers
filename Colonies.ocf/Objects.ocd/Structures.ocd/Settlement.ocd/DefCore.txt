@@ -1,5 +1,9 @@
 [DefCore]
 id=Structure_Settlement
 Version=8,0
+Width=32
+Height=32
+Offset=-16,-16
+ColorByOwner=1
 Category=C4D_StaticBack
 HideInCreator=true
